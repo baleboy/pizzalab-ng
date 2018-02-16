@@ -1,5 +1,6 @@
 <template>
   <div class="pizzalab">
+    <login-panel></login-panel>
     <h1>PizzaLab</h1>
     <div v-show="!showEditor">
     <ul>
@@ -16,13 +17,15 @@
 <script>
 import DoughEditor from './DoughEditor'
 import DoughCard from './DoughCard'
+import LoginPanel from './LoginPanel'
 import Dough from './dough.js'
 
 export default {
   name: 'PizzaLab',
   components: {
     DoughEditor,
-    DoughCard
+    DoughCard,
+    LoginPanel
   },
   data: function () {
     return {
