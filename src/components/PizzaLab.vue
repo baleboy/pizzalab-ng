@@ -19,6 +19,17 @@ import DoughEditor from './DoughEditor'
 import DoughCard from './DoughCard'
 import LoginPanel from './LoginPanel'
 import Dough from './dough.js'
+import firebase from 'firebase'
+
+let config = {
+  apiKey: 'AIzaSyD739TnqiRTSQcNsMaE4yj5SNeT7V9vLj4',
+  authDomain: 'pizzalab2-e80ef.firebaseapp.com',
+  databaseURL: 'https://pizzalab2-e80ef.firebaseio.com',
+  projectId: 'pizzalab2-e80ef',
+  storageBucket: 'pizzalab2-e80ef.appspot.com',
+  messagingSenderId: '911004980652'
+}
+firebase.initializeApp(config)
 
 export default {
   name: 'PizzaLab',
