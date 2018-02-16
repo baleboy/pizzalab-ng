@@ -4,7 +4,7 @@
     <div v-show="!showEditor">
     <ul>
       <li v-for="dough in doughList" v-on:click="editDough(dough)">
-        {{dough.doughName}}
+        <DoughCard v-bind:dough="dough" />
       </li>
     </ul>
     <button v-on:click="addDough">Add Dough</button>
@@ -15,12 +15,14 @@
 
 <script>
 import DoughEditor from './DoughEditor'
+import DoughCard from './DoughCard'
 import Dough from './dough.js'
 
 export default {
   name: 'PizzaLab',
   components: {
-    DoughEditor
+    DoughEditor,
+    DoughCard
   },
   data: function () {
     return {

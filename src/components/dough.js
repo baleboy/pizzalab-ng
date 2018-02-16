@@ -1,6 +1,7 @@
 export default class Dough {
   constructor (name = 'Default dough') {
     this.doughName = name
+    this.description = 'A generic dough'
     this.pizzas = 4
     this.hydration = 68
     this.yeastPrc = 0.5
@@ -13,6 +14,7 @@ export default class Dough {
 
   fromJSON (obj) {
     this.doughName = obj.doughName
+    this.description = obj.description
     this.pizzas = obj.pizzas
     this.hydration = obj.hydration
     this.yeastPrc = obj.yeastPrc
