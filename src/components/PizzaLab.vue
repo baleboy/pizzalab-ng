@@ -9,7 +9,7 @@
     </ul>
     <button v-on:click="addDough">Add Dough</button>
   </div>
-    <DoughEditor v-bind:dough="doughInEditor" v-show="showEditor" v-on:done="doughEdited"/>
+    <DoughEditor v-bind:dough="doughInEditor" v-show="showEditor" v-on:confirmed="doughEdited" v-on:cancelled="editCancelled"/>
   </div>
 </template>
 
@@ -50,6 +50,10 @@ export default {
       } else {
         this.editing = false
       }
+    },
+    editCancelled: function () {
+      this.editing = false
+      this.adding = false
     },
     editDough: function (dough) {
       this.doughInEditor = dough

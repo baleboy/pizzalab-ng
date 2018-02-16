@@ -7,7 +7,8 @@
     <p>Water: {{dough.water()}}</p>
     <p>Salt: {{dough.salt()}}</p>
     <p>Yeast: {{dough.yeast()}}</p>
-    <button v-on:click="done">Save</button>
+    <button v-on:click="save">Save</button>
+    <button v-on:click="cancel">Cancel</button>
   </div>
 </template>
 
@@ -17,8 +18,11 @@ export default {
   name: 'DoughEditor',
 
   methods: {
-    done: function () {
-      this.$emit('done')
+    save: function () {
+      this.$emit('confirmed')
+    },
+    cancel: function () {
+      this.$emit('cancelled')
     }
   },
 
