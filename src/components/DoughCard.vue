@@ -8,7 +8,7 @@
 <script>
 
 export default {
-  name: 'DoughCard',
+  name: 'dough-card',
 
   methods: {
     save: function () {

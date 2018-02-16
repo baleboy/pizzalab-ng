@@ -5,12 +5,12 @@
     <div v-show="!showEditor">
     <ul>
       <li v-for="dough in doughList" v-on:click="editDough(dough)">
-        <DoughCard v-bind:dough="dough" />
+        <dough-card v-bind:dough="dough"></dough-card>
       </li>
     </ul>
     <button v-on:click="addDough">Add Dough</button>
   </div>
-    <DoughEditor v-bind:dough="doughInEditor" v-show="showEditor" v-on:confirmed="doughEdited" v-on:cancelled="editCancelled"/>
+    <dough-editor v-bind:dough="doughInEditor" v-show="showEditor" v-on:confirmed="doughEdited" v-on:cancelled="editCancelled"></dough-editor>
   </div>
 </template>
 

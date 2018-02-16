@@ -16,7 +16,7 @@
 <script>
 
 export default {
-  name: 'DoughEditor',
+  name: 'dough-editor',
 
   methods: {
     save: function () {
