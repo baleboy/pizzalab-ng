@@ -23,6 +23,7 @@ export default {
       let vm = this
       firebase.auth().signInWithPopup(provider).then(function (result) {
         vm.user = result.user
+        vm.$emit('login', vm.user.uid)
       }).catch(function (error) {
         console.error(error)
         vm.user = null
@@ -32,6 +33,7 @@ export default {
       let vm = this
       firebase.auth().signOut().then(function () {
         vm.user = null
+        vm.$emit('logout')
       }).catch(function (error) {
         console.error(error)
       })

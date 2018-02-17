@@ -1,6 +1,6 @@
 <template>
-  <div class="pizzalab">
-    <login-panel></login-panel>
+  <div>
+    <login-panel v-on:login="userLogged"></login-panel>
     <h1>PizzaLab</h1>
     <div v-show="!showEditor">
     <ul>
@@ -32,7 +32,7 @@ let config = {
 firebase.initializeApp(config)
 
 export default {
-  name: 'PizzaLab',
+  name: 'pizza-lab',
   components: {
     DoughEditor,
     DoughCard,
@@ -74,6 +74,9 @@ export default {
     editDough: function (dough) {
       this.doughInEditor = dough
       this.editing = true
+    },
+    userLogged: function (uid) {
+      console.log('logged in user: ' + uid)
     }
   }
 }
