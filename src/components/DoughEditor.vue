@@ -9,6 +9,7 @@
     <p>Salt: {{dough.salt()}}</p>
     <p>Yeast: {{dough.yeast()}}</p>
     <button v-on:click="save">Save</button>
+    <button v-on:click="deleteDough">Delete</button>
     <button v-on:click="cancel">Cancel</button>
   </div>
 </template>
@@ -20,10 +21,13 @@ export default {
 
   methods: {
     save: function () {
-      this.$emit('confirmed')
+      this.$emit('save')
+    },
+    deleteDough: function() {
+      this.$emit('delete')
     },
     cancel: function () {
-      this.$emit('cancelled')
+      this.$emit('cancel')
     }
   },
 

@@ -10,7 +10,7 @@
     </ul>
     <button v-on:click="addDough">Add Dough</button>
   </div>
-    <dough-editor v-bind:dough="doughInEditor.dough" v-show="showEditor" v-on:confirmed="doughEdited" v-on:cancelled="editCancelled"></dough-editor>
+    <dough-editor v-bind:dough="doughInEditor.dough" v-show="showEditor" v-on:save="doughEdited" v-on:cancel="editCancelled" v-on:delete="deleteDough"></dough-editor>
   </div>
 </template>
 
@@ -78,6 +78,13 @@ export default {
     editDough: function (item) {
       this.doughInEditor = item
       this.editing = true
+    },
+    deleteDough: function () {
+      let key = this.doughInEditor.key
+      let doughRef = firebase.database().ref('users/' + this.userId + '/doughs/' + key)
+      doughRef.remove()
+      this.doughList = this.doughList.filter(e => e.key !== key)
+      this.editing = false
     },
     userLogged: function (uid) {
       console.log('logged in user: ' + uid)
