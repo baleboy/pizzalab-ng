@@ -4,13 +4,13 @@
     <h1>PizzaLab</h1>
     <div v-show="!showEditor">
     <ul>
-      <li v-for="dough in doughList" v-on:click="editDough(dough)">
-        <dough-card v-bind:dough="dough"></dough-card>
+      <li v-for="item in doughList" v-on:click="editDough(item)">
+        <dough-card v-bind:dough="item.dough"></dough-card>
       </li>
     </ul>
     <button v-on:click="addDough">Add Dough</button>
   </div>
-    <dough-editor v-bind:dough="doughInEditor" v-show="showEditor" v-on:confirmed="doughEdited" v-on:cancelled="editCancelled"></dough-editor>
+    <dough-editor v-bind:dough="doughInEditor.dough" v-show="showEditor" v-on:confirmed="doughEdited" v-on:cancelled="editCancelled"></dough-editor>
   </div>
 </template>
 
@@ -43,7 +43,7 @@ export default {
       adding: false,
       editing: false,
       draftDough: new Dough(),
-      doughInEditor: new Dough(),
+      doughInEditor: { key: null, dough: new Dough() },
       doughList: [],
       userId: null
     }
@@ -53,29 +53,30 @@ export default {
   },
   methods: {
     addDough: function () {
-      this.doughInEditor = this.draftDough
+      this.doughInEditor.dough = this.draftDough
       this.adding = true
     },
     doughEdited: function () {
-      if (this.adding) {
-        if (this.userId) {
-          let doughListRef = firebase.database().ref('users/' + this.userId + '/doughs')
+      if (this.userId) {
+        let doughListRef = firebase.database().ref('users/' + this.userId + '/doughs')
+        if (this.adding) {
           let newDoughRef = doughListRef.push()
-          newDoughRef.set(this.doughInEditor)
+          newDoughRef.set(this.doughInEditor.dough)
+          this.adding = false
         } else {
-          console.log('Cannot save dough to DB. No user.')
+          doughListRef.child(this.doughInEditor.key).set(this.doughInEditor.dough)
+          this.editing = false
         }
-        this.adding = false
       } else {
-        this.editing = false
+        console.log('Cannot save dough to DB. No user.')
       }
     },
     editCancelled: function () {
       this.editing = false
       this.adding = false
     },
-    editDough: function (dough) {
-      this.doughInEditor = dough
+    editDough: function (item) {
+      this.doughInEditor = item
       this.editing = true
     },
     userLogged: function (uid) {
@@ -87,7 +88,8 @@ export default {
       doughsRef.on('child_added', function (data) {
         let dough = new Dough()
         dough.fromJSON(data.val())
-        vm.doughList.push(dough)
+        let doughItem = { key: data.key, dough: dough }
+        vm.doughList.push(doughItem)
       })
     }
   }
