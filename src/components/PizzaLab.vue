@@ -62,7 +62,14 @@ export default {
     },
     doughEdited: function () {
       if (this.adding) {
-        this.doughList.push(this.doughInEditor)
+        if (this.userId) {
+          this.doughList.push(this.doughInEditor)
+          let doughListRef = firebase.database().ref('users/' + this.userId + '/doughs')
+          let newDoughRef = doughListRef.push()
+          newDoughRef.set(this.doughInEditor)
+        } else {
+          console.log('Cannot save dough. No user.')
+        }
         this.adding = false
       } else {
         this.editing = false
