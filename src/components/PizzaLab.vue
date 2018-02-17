@@ -44,11 +44,7 @@ export default {
       editing: false,
       draftDough: new Dough(),
       doughInEditor: new Dough(),
-      doughList: [
-        new Dough('Dough 1'),
-        new Dough('Dough 2'),
-        new Dough('Dough 3')
-      ],
+      doughList: [],
       userId: null
     }
   },
@@ -62,7 +58,6 @@ export default {
     },
     doughEdited: function () {
       if (this.adding) {
-        this.doughList.push(this.doughInEditor)
         if (this.userId) {
           let doughListRef = firebase.database().ref('users/' + this.userId + '/doughs')
           let newDoughRef = doughListRef.push()
@@ -86,6 +81,14 @@ export default {
     userLogged: function (uid) {
       console.log('logged in user: ' + uid)
       this.userId = uid
+      // retrieve dough list
+      let doughsRef = firebase.database().ref('users/' + this.userId + '/doughs')
+      let vm = this
+      doughsRef.on('child_added', function (data) {
+        let dough = new Dough()
+        dough.fromJSON(data.val())
+        vm.doughList.push(dough)
+      })
     }
   }
 }
