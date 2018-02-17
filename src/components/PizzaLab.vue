@@ -21,7 +21,7 @@ import LoginPanel from './LoginPanel'
 import Dough from './dough.js'
 import firebase from 'firebase'
 
-let config = {
+const config = {
   apiKey: 'AIzaSyD739TnqiRTSQcNsMaE4yj5SNeT7V9vLj4',
   authDomain: 'pizzalab2-e80ef.firebaseapp.com',
   databaseURL: 'https://pizzalab2-e80ef.firebaseio.com',
@@ -48,7 +48,8 @@ export default {
         new Dough('Dough 1'),
         new Dough('Dough 2'),
         new Dough('Dough 3')
-      ]
+      ],
+      userId: null
     }
   },
   computed: {
@@ -77,6 +78,7 @@ export default {
     },
     userLogged: function (uid) {
       console.log('logged in user: ' + uid)
+      this.userId = uid
     }
   }
 }

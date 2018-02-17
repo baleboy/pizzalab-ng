@@ -9,7 +9,7 @@
 
 import firebase from 'firebase'
 
-let provider = new firebase.auth.GoogleAuthProvider()
+const provider = new firebase.auth.GoogleAuthProvider()
 
 export default {
   name: 'login-panel',
