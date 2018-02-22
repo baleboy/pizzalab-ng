@@ -10,8 +10,8 @@
     <p>Yeast: {{dough.yeast()}}g</p>
     <h3>Steps</h3>
     <pre>{{dough.steps}}</pre>
-    <button v-on:click="close">Close</button>
     <button v-on:click="edit">Edit</button>
+    <button v-on:click="close">Close</button>
   </div>
 </template>
 
