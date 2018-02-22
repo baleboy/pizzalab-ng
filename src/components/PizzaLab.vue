@@ -1,6 +1,6 @@
 <template>
   <div>
-    <login-panel v-on:login="userLogged"></login-panel>
+    <login-panel v-on:login="userLogged" v-on:logout="removeUser"></login-panel>
     <h1>PizzaLab</h1>
     <div v-show="!showEditor">
     <ul>
@@ -98,6 +98,9 @@ export default {
         let doughItem = { key: data.key, dough: dough }
         vm.doughList.push(doughItem)
       })
+    },
+    removeUser: function () {
+      this.doughList = []
     }
   }
 }

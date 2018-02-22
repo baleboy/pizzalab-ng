@@ -10,7 +10,7 @@ export default class Dough {
     this.prefermentPrc = 0
     this.prefermentHydration = 100
     this.prefermentYeastPrc = 0.2
-    this.steps = ""
+    this.steps = ''
   }
 
   fromJSON (obj) {

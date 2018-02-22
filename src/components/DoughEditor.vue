@@ -26,7 +26,7 @@ export default {
     save: function () {
       this.$emit('save')
     },
-    deleteDough: function() {
+    deleteDough: function () {
       this.$emit('delete')
     },
     cancel: function () {
