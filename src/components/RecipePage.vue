@@ -8,6 +8,12 @@
     <p>Water: {{dough.water()}}g</p>
     <p>Salt: {{dough.salt()}}g</p>
     <p>Yeast: {{dough.yeast()}}g</p>
+    <div v-if="dough.prefermentPrc > 0">
+      <h3>Starter</h3>
+      <p>Flour: {{dough.prefermentFlour()}}g</p>
+      <p>Water: {{dough.prefermentWater()}}g</p>
+      <p>Yeast: {{dough.prefermentYeast()}}g</p>
+    </div>
     <h3>Steps</h3>
     <pre>{{dough.steps}}</pre>
     <button v-on:click="edit">Edit</button>

@@ -6,7 +6,12 @@
     <p>Pizzas: <input type="number" v-model.number="dough.pizzas"></p>
     <p>Hydration: <input type="number" v-model.number="dough.hydration"></p>
     <p>Yeast: <input type="number" step="0.1" v-model.number="dough.yeastPrc">%</p>
-    <p>Salt:  <input type="number" step="0.1" v-model.number="dough.saltPrc"></p>
+    <p>Salt:  <input type="number" step="0.1" v-model.number="dough.saltPrc">%</p>
+    <p>Starter: <input type="number" step="any" v-model.number="dough.prefermentPrc">%</p>
+    <div v-if="dough.prefermentPrc > 0">
+      <p>Starter hydration: <input type="number" step="any" v-model.number.lazy="dough.prefermentHydration">%</p>
+      <p>Starter yeast: <input type="number" step="any" v-model.number.lazy="dough.prefermentYeastPrc">%</p>
+    </div>
     <p>Steps:</p>
     <textarea v-model="dough.steps"></textarea>
     <p>Flour: {{dough.flour()}}</p>
