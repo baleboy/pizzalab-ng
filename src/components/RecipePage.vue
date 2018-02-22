@@ -9,7 +9,7 @@
     <p>Salt: {{dough.salt()}}g</p>
     <p>Yeast: {{dough.yeast()}}g</p>
     <h3>Steps</h3>
-    <p>{{dough.steps}}</p>
+    <pre>{{dough.steps}}</pre>
     <button v-on:click="close">Close</button>
     <button v-on:click="edit">Edit</button>
   </div>
