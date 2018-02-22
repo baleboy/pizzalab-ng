@@ -1,9 +1,12 @@
 <template>
   <div>
     <p>Name: <input type="text" v-model="dough.doughName"></p>
-    <p>Description: <input type="textarea" v-model="dough.description"></p>
+    <p>Description:</p>
+    <textarea v-model="dough.description"></textarea>
     <p>Pizzas: <input type="number" v-model.number="dough.pizzas"></p>
     <p>Hydration: <input type="number" v-model.number="dough.hydration"></p>
+    <p>Steps:</p>
+    <textarea v-model="dough.steps"></textarea>
     <p>Flour: {{dough.flour()}}</p>
     <p>Water: {{dough.water()}}</p>
     <p>Salt: {{dough.salt()}}</p>
