@@ -5,6 +5,8 @@
     <textarea v-model="dough.description"></textarea>
     <p>Pizzas: <input type="number" v-model.number="dough.pizzas"></p>
     <p>Hydration: <input type="number" v-model.number="dough.hydration"></p>
+    <p>Yeast: <input type="number" step="0.1" v-model.number="dough.yeastPrc">%</p>
+    <p>Salt:  <input type="number" step="0.1" v-model.number="dough.saltPrc"></p>
     <p>Steps:</p>
     <textarea v-model="dough.steps"></textarea>
     <p>Flour: {{dough.flour()}}</p>
