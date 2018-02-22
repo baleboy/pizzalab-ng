@@ -2,6 +2,7 @@
   <div>
     <h2>{{dough.doughName}}</h2>
     <p>{{dough.description}}</p>
+    <p>{{dough.hydration}}% hydration</p>
   </div>
 </template>
 
