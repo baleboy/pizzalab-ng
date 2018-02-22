@@ -2,15 +2,16 @@
   <div>
     <login-panel v-on:login="userLogged" v-on:logout="removeUser"></login-panel>
     <h1>PizzaLab</h1>
-    <div v-show="!showEditor">
+    <div v-show="showList">
     <ul>
-      <li v-for="item in doughList" v-on:click="editDough(item)">
+      <li v-for="item in doughList" v-on:click="openRecipe(item)">
         <dough-card v-bind:dough="item.dough"></dough-card>
       </li>
     </ul>
     <button v-on:click="addDough">Add Dough</button>
   </div>
     <dough-editor v-bind:dough="doughInEditor.dough" v-show="showEditor" v-on:save="doughEdited" v-on:cancel="editCancelled" v-on:delete="deleteDough"></dough-editor>
+    <recipe-page v-bind:dough="doughInEditor.dough" v-show="showRecipe" @close="showRecipe = false" @edit="editDough"></recipe-page>
   </div>
 </template>
 
@@ -18,6 +19,7 @@
 import DoughEditor from './DoughEditor'
 import DoughCard from './DoughCard'
 import LoginPanel from './LoginPanel'
+import RecipePage from './RecipePage'
 import Dough from './dough.js'
 import firebase from 'firebase'
 
@@ -36,12 +38,14 @@ export default {
   components: {
     DoughEditor,
     DoughCard,
-    LoginPanel
+    LoginPanel,
+    RecipePage
   },
   data: function () {
     return {
       adding: false,
       editing: false,
+      showRecipe: false,
       draftDough: new Dough(),
       doughInEditor: { key: null, dough: new Dough() },
       doughList: [],
@@ -49,7 +53,8 @@ export default {
     }
   },
   computed: {
-    showEditor: function () { return this.editing || this.adding }
+    showEditor: function () { return this.editing || this.adding },
+    showList: function () { return !this.showEditor && !this.showRecipe }
   },
   methods: {
     addDough: function () {
@@ -75,9 +80,13 @@ export default {
       this.editing = false
       this.adding = false
     },
-    editDough: function (item) {
-      this.doughInEditor = item
+    editDough: function () {
+      this.showRecipe = false
       this.editing = true
+    },
+    openRecipe: function (item) {
+      this.doughInEditor = item
+      this.showRecipe = true
     },
     deleteDough: function () {
       let key = this.doughInEditor.key
