@@ -71,14 +71,19 @@ export default {
         } else {
           doughListRef.child(this.doughInEditor.key).set(this.doughInEditor.dough)
           this.editing = false
+          this.showRecipe = true
         }
       } else {
         console.log('Cannot save dough to DB. No user.')
       }
     },
     editCancelled: function () {
+      let wasEditing = this.editing
       this.editing = false
       this.adding = false
+      if (wasEditing) {
+        this.showRecipe = true
+      }
     },
     editDough: function () {
       this.showRecipe = false
