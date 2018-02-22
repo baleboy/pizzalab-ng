@@ -2,8 +2,8 @@
   <div>
     <h2>{{dough.doughName}}</h2>
     <p>{{dough.description}}</p>
-    <p>{{dough.pizzas}} pizzas</p>
     <p>{{dough.hydration}}% hydration</p>
+    <p>Pizzas: <input type="number" v-model.number="dough.pizzas"></p>
     <p>Flour: {{dough.flour()}}g</p>
     <p>Water: {{dough.water()}}g</p>
     <p>Salt: {{dough.salt()}}g</p>
