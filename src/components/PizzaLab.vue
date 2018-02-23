@@ -11,11 +11,11 @@
       </div>
     </div>
     <div v-show="showList">
-    <ul>
-      <li v-for="item in doughList" v-on:click="openRecipe(item)">
+    <div class="item-wrapper">
+      <div class="item" v-for="item in doughList" v-on:click="openRecipe(item)">
         <dough-card v-bind:dough="item.dough"></dough-card>
-      </li>
-    </ul>
+      </div>
+    </div>
     <button v-on:click="addDough">Add Dough</button>
   </div>
     <dough-editor v-bind:dough="doughInEditor.dough" v-show="showEditor" v-on:save="doughEdited" v-on:cancel="editCancelled" v-on:delete="deleteDough"></dough-editor>
@@ -175,6 +175,20 @@ export default {
 
 .align-right {
   float: right; }
+
+.item-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: auto;
+  margin-bottom: 2em;
+  margin-left: 4em;
+  justify-content: flex-start; }
+
+.item {
+  margin: 1em; }
 
 ul {
   list-style-type: none;
