@@ -1,7 +1,15 @@
 <template>
   <div>
-    <login-panel v-on:login="userLogged" v-on:logout="removeUser"></login-panel>
-    <h1>PizzaLab</h1>
+    <div class="header">
+      <div class="vertical-centered">
+        <div class="title">
+          PizzaLab
+        </div>
+      </div>
+      <div class="vertical-centered">
+        <login-panel v-on:login="userLogged" v-on:logout="removeUser"></login-panel>
+      </div>
+    </div>
     <div v-show="showList">
     <ul>
       <li v-for="item in doughList" v-on:click="openRecipe(item)">
@@ -122,6 +130,26 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+.header {
+  display: table;
+  width: 100%;
+  background-color: #0077ff;
+  color: white;
+  padding: 1em;
+  padding-left: 2em; }
+
+.vertical-centered {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100px; }
+
+.title {
+  font-size: 3em;
+  float: left;
+  font-family: 'Lobster', cursive; }
+
 h1, h2 {
   font-weight: normal;
 }
