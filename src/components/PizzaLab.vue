@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="vertical-centered">
-        <login-panel v-on:login="userLogged" v-on:logout="removeUser"></login-panel>
+        <login-panel v-on:login="userLogged" v-on:logout="removeUser" class="align-right"></login-panel>
       </div>
     </div>
     <div v-show="showList">
@@ -128,7 +128,29 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- App-wide style -->
+<style>
+  button {
+    font-size: 0.8em;
+    padding: 10px;
+    border: 0;
+    box-shadow: none;
+    border-radius: 2px;
+    background-color: #00AAFF;
+    color: white; }
+
+  button:disabled {
+    background-color: lightGray;
+    color: darkGray; }
+
+  button:hover:enabled {
+    background-color: #00BBFF; }
+
+  button:active:enabled {
+    background-color: #00CCFF; }
+</style>
+
+<!-- Style local to this page -->
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Lobster');
 
@@ -138,7 +160,7 @@ export default {
   background-color: #0077ff;
   color: white;
   padding: 1em;
-  padding-left: 2em; }
+ }
 
 .vertical-centered {
   display: table-cell;
@@ -149,6 +171,9 @@ export default {
   font-size: 3em;
   float: left;
   font-family: 'Lobster', cursive; }
+
+.align-right {
+  float: right; }
 
 h1, h2 {
   font-weight: normal;

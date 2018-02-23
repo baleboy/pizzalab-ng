@@ -24,6 +24,12 @@ export default {
   color: #2c3e50;
 }
 
+* {
+  box-sizing: border-box; }
+
+[v-cloak] {
+  display: none; }
+  
 html, body {
   padding: 0;
   margin: 0;
