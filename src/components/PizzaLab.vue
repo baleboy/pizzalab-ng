@@ -160,6 +160,7 @@ export default {
   background-color: #0077ff;
   color: white;
   padding: 1em;
+  padding-left: 2em;
  }
 
 .vertical-centered {
