@@ -42,7 +42,7 @@ a {
   margin-top: 2em;
   margin-bottom: 2em;
   padding: 1em;
-  width: 210px; 
+  width: 210px;
   height: 250px;}
 
 p {

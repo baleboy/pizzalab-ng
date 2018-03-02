@@ -29,7 +29,7 @@ export default {
 
 [v-cloak] {
   display: none; }
-  
+
 html, body {
   padding: 0;
   margin: 0;
@@ -43,4 +43,15 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-overflow-scrolling: touch; }
 
+input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid lightGray; }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+  
 </style>
