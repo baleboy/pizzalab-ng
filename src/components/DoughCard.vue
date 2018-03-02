@@ -41,7 +41,7 @@ a {
   margin: auto;
   margin-top: 2em;
   margin-bottom: 2em;
-  padding-top: 1em;
+  padding: 1em;
   width: 210px; 
   height: 250px;}
 
