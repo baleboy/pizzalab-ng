@@ -130,11 +130,11 @@ a {
   color: #777777; }
 
 .instructions {
-  max-width: 450px;
+  max-width: 550px;
   margin: auto;
 }
 .instructions p {
-  white-space: pre;
+  white-space: pre-wrap;
   text-align: justify;
 }
 
@@ -143,7 +143,7 @@ a {
     max-width: 400px;
   }
   .instructions {
-    max-width: 350;
+    max-width: 300px;
   }
 }
 </style>
