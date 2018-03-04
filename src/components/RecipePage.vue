@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>{{dough.doughName}}</h1>
-    <p>{{dough.description}}</p>
     <p>{{dough.hydration}}% hydration</p>
     <div class="pizzas">
       <h2>Pizzas</h2>
@@ -137,5 +136,14 @@ a {
 .instructions p {
   white-space: pre;
   text-align: justify;
+}
+
+@media (max-width: 660px) {
+  .item-wrapper {
+    max-width: 400px;
+  }
+  .instructions {
+    max-width: 350;
+  }
 }
 </style>

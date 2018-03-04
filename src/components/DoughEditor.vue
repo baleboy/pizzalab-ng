@@ -1,8 +1,6 @@
 <template>
   <div>
     <p>Name: <input type="text" v-model="dough.doughName"></p>
-    <p>Description:</p>
-    <textarea v-model="dough.description"></textarea>
     <p>Pizzas: <input type="number" v-model.number="dough.pizzas"></p>
     <p>Hydration: <input type="number" v-model.number="dough.hydration"></p>
     <p>Yeast: <input type="number" step="0.1" v-model.number="dough.yeastPrc">%</p>
