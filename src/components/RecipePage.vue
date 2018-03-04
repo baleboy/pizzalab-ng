@@ -40,8 +40,10 @@
           <p>{{dough.prefermentYeast()}}g</p>
         </div>
       </div>
-    <h2>Steps</h2>
-    <pre>{{dough.steps}}</pre>
+    <div class="instructions">
+      <h2>Instructions</h2>
+      <p>{{dough.steps}}</p>
+    </div>
     <button v-on:click="edit">Edit</button>
     <button v-on:click="close">Close</button>
   </div>
@@ -61,7 +63,13 @@ export default {
     }
   },
 
-  props: [ 'dough' ]
+  props: [ 'dough' ],
+
+  computed: {
+    instructions: function () {
+      return this.dough.steps.replace(/\r?\n/g, '<br>')
+    }
+  }
 }
 </script>
 
@@ -121,4 +129,13 @@ a {
   margin-top: 0;
   margin-bottom: 0.5em;
   color: #777777; }
+
+.instructions {
+  max-width: 450px;
+  margin: auto;
+}
+.instructions p {
+  white-space: pre;
+  text-align: justify;
+}
 </style>
