@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>{{dough.doughName}}</h2>
+    <h1>{{dough.doughName}}</h1>
     <p>{{dough.description}}</p>
     <p>{{dough.hydration}}% hydration</p>
     <div class="pizzas">
