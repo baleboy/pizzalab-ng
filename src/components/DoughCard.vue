@@ -38,8 +38,6 @@ a {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   margin: auto;
-  margin-top: 2em;
-  margin-bottom: 2em;
   padding: 1em;
   width: 210px;
   height: 250px;}

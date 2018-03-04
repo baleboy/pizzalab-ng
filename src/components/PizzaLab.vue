@@ -10,6 +10,7 @@
         <login-panel v-on:login="userLogged" v-on:logout="removeUser" class="align-right"></login-panel>
       </div>
     </div>
+    <div class="content">
     <div v-show="showList">
     <div class="item-wrapper">
       <div class="item" v-for="item in doughList" v-on:click="openRecipe(item)">
@@ -21,6 +22,7 @@
     <dough-editor v-bind:dough="doughInEditor.dough" v-show="showEditor" v-on:save="doughEdited" v-on:cancel="editCancelled" v-on:delete="deleteDough"></dough-editor>
     <recipe-page v-bind:dough="doughInEditor.dough" v-show="showRecipe" @close="showRecipe = false" @edit="editDough"></recipe-page>
   </div>
+</div>
 </template>
 
 <script>
@@ -159,10 +161,14 @@ export default {
   width: 100%;
   background-color: #0077ff;
   color: white;
-  padding: 1em;
+  padding: 0.4em;
   padding-left: 2em;
+  padding-right: 2em;
  }
 
+.content {
+  margin-top: 2em;
+}
 .vertical-centered {
   display: table-cell;
   vertical-align: middle;
