@@ -20,14 +20,7 @@ export default {
   },
   methods: {
     login: function () {
-      let vm = this
-      firebase.auth().signInWithPopup(provider).then(function (result) {
-        vm.user = result.user
-        vm.$emit('login', vm.user.uid)
-      }).catch(function (error) {
-        console.error(error)
-        vm.user = null
-      })
+      firebase.auth().signInWithPopup(provider)
     },
     logout: function () {
       let vm = this
@@ -43,6 +36,14 @@ export default {
     isLoggedIn: function () {
       return (this.user !== null)
     }
+  },
+  mounted: function () {
+    firebase.auth().onAuthStateChanged(function (authData) {
+      if (authData) {
+        this.user = authData
+        this.$emit('login', this.user.uid)
+      }
+    }.bind(this))
   }
 }
 </script>
