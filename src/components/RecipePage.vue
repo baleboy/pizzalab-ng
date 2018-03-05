@@ -39,7 +39,7 @@
           <p>{{dough.prefermentYeast()}}g</p>
         </div>
       </div>
-    <div class="instructions">
+    <div class="instructions" v-if="dough.steps">
       <h2>Instructions</h2>
       <p>{{dough.steps}}</p>
     </div>
