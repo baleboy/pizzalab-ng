@@ -82,4 +82,10 @@ textarea {
   width: 450px;
   height: 300px;
 }
+
+@media (max-width: 660px) {
+  textarea {
+    width: 300px;
+  }
+}
 </style>
