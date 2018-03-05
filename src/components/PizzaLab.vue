@@ -56,7 +56,7 @@ export default {
       adding: false,
       editing: false,
       showRecipe: false,
-      draftDough: new Dough(),
+      draftDough: { key: null, dough: new Dough() },
       doughInEditor: { key: null, dough: new Dough() },
       doughList: [],
       userId: null
@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     addDough: function () {
-      this.doughInEditor.dough = this.draftDough
+      this.doughInEditor = this.draftDough
       this.adding = true
     },
     doughEdited: function () {
