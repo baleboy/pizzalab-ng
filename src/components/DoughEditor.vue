@@ -10,8 +10,8 @@
       <p>Starter hydration: <input type="number" step="any" v-model.number.lazy="dough.prefermentHydration">%</p>
       <p>Starter yeast: <input type="number" step="any" v-model.number.lazy="dough.prefermentYeastPrc">%</p>
     </div>
-    <p>Steps:</p>
-    <textarea v-model="dough.steps"></textarea>
+    <h2>Instructions:</h2>
+    <textarea v-model="dough.steps" placeholder="Enter steps here"></textarea>
     <p>Flour: {{dough.flour()}}</p>
     <p>Water: {{dough.water()}}</p>
     <p>Salt: {{dough.salt()}}</p>
@@ -45,6 +45,21 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+input[type="text"],
+input[type="number"]
+{
+    font-size:1em;
+    font-family: 'Open Sans', sans-serif;
+}
+
+input[type="text"] {
+  width: 300px;
+}
+
+input[type="number"] {
+  width: 30px;
+}
+
 h1, h2 {
   font-weight: normal;
 }
@@ -58,5 +73,13 @@ li {
 }
 a {
   color: #42b983;
+}
+
+textarea {
+  outline: none;
+  resize: none;
+  font-size: 1em;
+  width: 450px;
+  height: 300px;
 }
 </style>
