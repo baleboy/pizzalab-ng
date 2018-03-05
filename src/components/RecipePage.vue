@@ -44,6 +44,7 @@
       <p>{{dough.steps}}</p>
     </div>
     <button v-on:click="edit">Edit</button>
+    <button v-on:click="deleteDough">Delete</button>
     <button v-on:click="close">Close</button>
   </div>
 </template>
@@ -59,6 +60,9 @@ export default {
     },
     edit: function () {
       this.$emit('edit')
+    },
+    deleteDough: function () {
+      this.$emit('delete')
     }
   },
 

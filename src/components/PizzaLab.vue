@@ -20,7 +20,7 @@
     <button v-on:click="addDough">Add Dough</button>
   </div>
     <dough-editor v-bind:dough="doughInEditor.dough" v-show="showEditor" v-on:save="doughEdited" v-on:cancel="editCancelled" v-on:delete="deleteDough"></dough-editor>
-    <recipe-page v-bind:dough="doughInEditor.dough" v-show="showRecipe" @close="showRecipe = false" @edit="editDough"></recipe-page>
+    <recipe-page v-bind:dough="doughInEditor.dough" v-show="showRecipe" @close="showRecipe = false" @edit="editDough" @delete="deleteDough"></recipe-page>
   </div>
 </div>
 </template>
@@ -109,6 +109,7 @@ export default {
       doughRef.remove()
       this.doughList = this.doughList.filter(e => e.key !== key)
       this.editing = false
+      this.showRecipe = false
     },
     userLogged: function (uid) {
       console.log('logged in user: ' + uid)
