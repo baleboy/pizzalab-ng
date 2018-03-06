@@ -50,23 +50,55 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+import Dough from './dough'
 
 export default {
   name: 'recipe-page',
 
-  methods: {
-    close: function () {
-      this.$emit('close')
-    },
-    edit: function () {
-      this.$emit('edit')
-    },
-    deleteDough: function () {
-      this.$emit('delete')
+  data () {
+    return {
+      dough: new Dough()
     }
   },
 
-  props: [ 'dough' ],
+  created () {
+    this.getDough()
+  },
+  watch: {
+    '$route': 'getDough'
+  },
+
+  methods: {
+    close: function () {
+      this.$router.replace('/')
+    },
+    edit: function () {
+      let uid = this.$route.params.userId
+      let did = this.$route.params.doughId
+      this.$router.push({ path: `/${uid}/doughs/${did}/edit` })
+    },
+    deleteDough: function () {
+      this.getDoughRef().remove()
+      this.close()
+    },
+    getDough: function () {
+      this.getDoughRef().once('value').then(function (snapshot) {
+        if (snapshot.val()) {
+          this.dough.fromJSON(snapshot.val())
+        } else {
+          console.log('Error retrieving dough')
+        }
+      }.bind(this))
+    },
+    getDoughRef: function () {
+      let uid = this.$route.params.userId
+      let did = this.$route.params.doughId
+      return firebase.database().ref('users/' + uid + '/doughs/' + did)
+    }
+  },
+
+  props: [ 'userId', 'doughId' ],
 
   computed: {
     instructions: function () {

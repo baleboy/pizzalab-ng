@@ -1,21 +1,36 @@
 <template>
   <div id="app">
-    <PizzaLab/>
+    <div class="header">
+      <div class="vertical-centered">
+        <div class="title">
+          PizzaLab
+        </div>
+      </div>
+      <div class="vertical-centered">
+        <login-panel class="align-right"></login-panel>
+      </div>
+    </div>
+    <div class="content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import PizzaLab from './components/PizzaLab'
 
+import LoginPanel from './components/LoginPanel'
 export default {
   name: 'App',
   components: {
-    PizzaLab
+    LoginPanel
   }
 }
+
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -54,4 +69,49 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0; }
 
+button {
+  font-size: 0.8em;
+  padding: 10px;
+  border: 0;
+  box-shadow: none;
+  border-radius: 2px;
+  background-color: #00AAFF;
+  color: white; }
+
+button:disabled {
+  background-color: lightGray;
+  color: darkGray; }
+
+button:hover:enabled {
+  background-color: #00BBFF; }
+
+button:active:enabled {
+  background-color: #00CCFF; }
+
+.header {
+  display: table;
+  width: 100%;
+  background-color: #0077ff;
+  color: white;
+  padding: 0.4em;
+  padding-left: 2em;
+  padding-right: 2em;
+ }
+
+.vertical-centered {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100px; }
+
+.title {
+  font-size: 3em;
+  float: left;
+  font-family: 'Lobster', cursive; }
+
+.align-right {
+  float: right; }
+
+.content {
+  margin-top: 2em;
+}
 </style>

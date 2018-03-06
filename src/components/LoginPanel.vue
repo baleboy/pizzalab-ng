@@ -18,6 +18,13 @@ export default {
       user: null
     }
   },
+  mounted: function () {
+    firebase.auth().onAuthStateChanged(function (authData) {
+      if (authData) {
+        this.user = authData
+      }
+    }.bind(this))
+  },
   methods: {
     login: function () {
       firebase.auth().signInWithPopup(provider)
@@ -36,14 +43,6 @@ export default {
     isLoggedIn: function () {
       return (this.user !== null)
     }
-  },
-  mounted: function () {
-    firebase.auth().onAuthStateChanged(function (authData) {
-      if (authData) {
-        this.user = authData
-        this.$emit('login', this.user.uid)
-      }
-    }.bind(this))
   }
 }
 </script>

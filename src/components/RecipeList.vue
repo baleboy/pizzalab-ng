@@ -1,0 +1,89 @@
+<template>
+  <div>
+      <div class="item-wrapper">
+        <div class="item" v-for="item in doughList" v-on:click="openRecipe(item)">
+          <dough-card v-bind:dough="item.dough"></dough-card>
+        </div>
+      </div>
+      <button v-on:click="addDough">Add Dough</button>
+    </div>
+</template>
+
+<script>
+import DoughCard from './DoughCard'
+import Dough from './dough.js'
+import firebase from 'firebase'
+
+const config = {
+  apiKey: 'AIzaSyD739TnqiRTSQcNsMaE4yj5SNeT7V9vLj4',
+  authDomain: 'pizzalab2-e80ef.firebaseapp.com',
+  databaseURL: 'https://pizzalab2-e80ef.firebaseio.com',
+  projectId: 'pizzalab2-e80ef',
+  storageBucket: 'pizzalab2-e80ef.appspot.com',
+  messagingSenderId: '911004980652'
+}
+firebase.initializeApp(config)
+
+export default {
+  name: 'recipe-list',
+  components: {
+    DoughCard
+  },
+  data: function () {
+    return {
+      doughList: [],
+      userId: null
+    }
+  },
+  mounted: function () {
+    firebase.auth().onAuthStateChanged(function (authData) {
+      if (authData) {
+        this.userLogged(authData.uid)
+      } else {
+        this.removeUser()
+      }
+    }.bind(this))
+  },
+  methods: {
+    addDough: function () {
+      this.$router.push({ path: `/${this.userId}/add` })
+    },
+    openRecipe: function (item) {
+      this.$router.push({ path: `/${this.userId}/doughs/${item.key}` })
+    },
+    userLogged: function (uid) {
+      console.log('logged in user: ' + uid)
+      this.userId = uid
+      // retrieve dough list
+      let doughsRef = firebase.database().ref('users/' + this.userId + '/doughs')
+      doughsRef.on('child_added', function (data) {
+        let dough = new Dough()
+        dough.fromJSON(data.val())
+        let doughItem = { key: data.key, dough: dough }
+        this.doughList.push(doughItem)
+      }.bind(this))
+    },
+    removeUser: function () {
+      this.doughList = []
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+.item-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: auto;
+  margin-bottom: 2em;
+  margin-left: 4em;
+  justify-content: flex-start; }
+
+.item {
+  margin: 1em; }
+
+</style>
