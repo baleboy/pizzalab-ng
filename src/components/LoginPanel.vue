@@ -1,6 +1,5 @@
 <template>
   <div>
-    <button v-if="!isLoggedIn" v-on:click="login">Login with Google</button>
     <span v-if="isLoggedIn">{{ user.displayName }}</span>
     <button v-if="isLoggedIn" v-on:click="logout">Logout</button>
   </div>
