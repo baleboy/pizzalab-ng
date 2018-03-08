@@ -16,12 +16,11 @@ export default {
 
   mounted: function () {
     let uiConfig = {
-      signInSuccessUrl: 'http://localhost:8080',
+      signInSuccessUrl: '/',
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.EmailAuthProvider.PROVIDER_ID
-      ],
-      tosUrl: 'https://www.balenet.com'
+      ]
     }
 
     let ui = new firebaseui.auth.AuthUI(firebase.auth())
