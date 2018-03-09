@@ -2,7 +2,7 @@
   <div>
     <p>Name: <input type="text" v-model="dough.doughName"></p>
     <p>Pizzas: <input type="number" v-model.number="dough.pizzas"></p>
-    <p>Hydration: <input type="number" v-model.number="dough.hydration"></p>
+    <p>Hydration: <input type="number" v-model.number="dough.hydration">%</p>
     <p>Yeast: <input type="number" step="0.1" v-model.number="dough.yeastPrc">%</p>
     <p>Salt:  <input type="number" step="0.1" v-model.number="dough.saltPrc">%</p>
     <p>Starter: <input type="number" step="any" v-model.number="dough.prefermentPrc">%</p>
@@ -52,8 +52,8 @@ export default {
         let doughListRef = firebase.database().ref('users/' + this.userId + '/doughs')
         let newDoughRef = doughListRef.push()
         newDoughRef.set(this.dough)
-        this.$router.replace('/')
       }
+      this.$router.replace('/')
     },
     deleteDough: function () {
       this.getDoughRef().remove()
