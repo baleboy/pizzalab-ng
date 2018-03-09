@@ -2,6 +2,7 @@
   <div class="card">
     <h2>{{dough.doughName}}</h2>
     <p>{{dough.hydration}}% hydration</p>
+    <p class="date">Created: {{createdTime}}</p>
   </div>
 </template>
 
@@ -19,7 +20,14 @@ export default {
     }
   },
 
-  props: [ 'dough' ]
+  props: [ 'dough' ],
+
+  computed: {
+    createdTime: function () {
+      let dt = new Date(this.dough.timeCreated)
+      return dt.toLocaleString()
+    }
+  }
 }
 </script>
 
@@ -44,9 +52,14 @@ a {
 
 p {
   margin-bottom: 0.2em;
+  color: gray;
 }
 .card:hover {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.date {
+  font-size: 0.8em;
 }
 
 </style>

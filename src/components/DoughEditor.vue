@@ -46,11 +46,13 @@ export default {
 
   methods: {
     save: function () {
+      let ts = Date.now()
       if (this.doughId) {
         this.getDoughRef().set(this.dough)
       } else {
         let doughListRef = firebase.database().ref('users/' + this.userId + '/doughs')
         let newDoughRef = doughListRef.push()
+        this.dough.timeCreated = ts
         newDoughRef.set(this.dough)
       }
       this.$router.replace('/')
