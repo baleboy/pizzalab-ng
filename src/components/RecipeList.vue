@@ -51,6 +51,9 @@ export default {
         dough.fromJSON(data.val())
         let doughItem = { key: data.key, dough: dough }
         this.doughList.push(doughItem)
+        this.doughList.sort(function (d1, d2) {
+          return (d2.dough.timeCreated - d1.dough.timeCreated)
+        })
       }.bind(this))
     },
     removeUser: function () {
