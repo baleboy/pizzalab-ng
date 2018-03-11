@@ -6,8 +6,8 @@ import firebase from 'firebase'
 import App from './App'
 import RecipeList from './components/RecipeList'
 import RecipePage from './components/RecipePage'
-import DoughEditor from './components/DoughEditor'
 import LoginPage from './components/LoginPage'
+import NewDoughPage from './components/NewDoughPage'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
@@ -20,8 +20,7 @@ Vue.use(VuejsDialog, {
 const routes = [
   { path: '/', component: RecipeList },
   { path: '/:userId/doughs/:doughId', component: RecipePage, props: true },
-  { path: '/:userId/doughs/:doughId/edit', component: DoughEditor, props: true },
-  { path: '/:userId/add', component: DoughEditor, props: true },
+  { path: '/:userId/add', component: NewDoughPage, props: true },
   { path: '/auth', component: LoginPage }
 ]
 

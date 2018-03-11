@@ -17,72 +17,28 @@
     <p>Salt: {{dough.salt()}}</p>
     <p>Yeast: {{dough.yeast()}}</p>
     <button v-on:click="save">Save</button>
-    <button v-if="doughId" v-on:click="deleteDough">Delete</button>
     <button v-on:click="close">Close</button>
   </div>
 </template>
 
 <script>
 
-import Dough from './dough'
-import firebase from 'firebase'
-
 export default {
   name: 'dough-editor',
 
-  data () {
-    return {
-      dough: new Dough()
-    }
-  },
-
-  created () {
-    this.getDough()
-  },
-
-  watch: {
-    '$route': 'getDough'
-  },
-
   methods: {
     save: function () {
-      let ts = Date.now()
-      if (this.doughId) {
-        this.getDoughRef().set(this.dough)
-      } else {
-        let doughListRef = firebase.database().ref('users/' + this.userId + '/doughs')
-        let newDoughRef = doughListRef.push()
-        this.dough.timeCreated = ts
-        newDoughRef.set(this.dough)
-      }
-      this.$router.replace('/')
+      this.$emit('save')
     },
     deleteDough: function () {
-      this.getDoughRef().remove()
-      this.$router.replace('/')
+      this.$emit('delete')
     },
     close: function () {
-      this.$router.go('-1')
-    },
-    getDough: function () {
-      if (this.doughId) {
-        this.getDoughRef().once('value').then(function (snapshot) {
-          if (snapshot.val()) {
-            this.dough.copy(snapshot.val())
-          } else {
-            console.log('Error retrieving dough')
-          }
-        }.bind(this))
-      }
-    },
-    getDoughRef: function () {
-      let uid = this.$route.params.userId
-      let did = this.$route.params.doughId
-      return firebase.database().ref('users/' + uid + '/doughs/' + did)
+      this.$emit('close')
     }
   },
 
-  props: [ 'userId', 'doughId' ]
+  props: [ 'dough' ]
 }
 </script>
 

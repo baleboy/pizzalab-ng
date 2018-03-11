@@ -1,64 +1,74 @@
 <template>
   <div>
-    <h1>{{dough.doughName}}</h1>
-    <p>{{dough.hydration}}% hydration</p>
-    <div class="pizzas">
-      <h2>Pizzas</h2>
-      <input type="number" v-model.number="dough.pizzas">
-    </div>
-    <h2>Ingredients</h2>
-      <div class="ingredients item-wrapper">
-        <div class="ingredient item">
-          <h2>Flour</h2>
-          <p>{{dough.flour() - dough.prefermentFlour() }}g</p>
-        </div>
-        <div class="ingredient item">
-          <h2>Water</h2>
-          <p>{{dough.water() - dough.prefermentWater()}}g</p>
-        </div>
-        <div class="ingredient item">
-          <h2>Salt</h2>
-          <p>{{dough.salt()}}g</p>
-        </div>
-        <div class="ingredient item">
-          <h2>Yeast</h2>
-          <p>{{dough.yeast() - dough.prefermentYeast()}}g</p>
-        </div>
+    <div v-show="!editing">
+      <h1>{{dough.doughName}}</h1>
+      <p>{{dough.hydration}}% hydration</p>
+      <div class="pizzas">
+        <h2>Pizzas</h2>
+        <input type="number" v-model.number="dough.pizzas">
       </div>
-      <div v-if="dough.prefermentPrc > 0" class="ingredients item-wrapper">
-        <div class="ingredient item">
-          <h2>Starter flour</h2>
-          <p>{{dough.prefermentFlour()}}g</p>
+      <h2>Ingredients</h2>
+        <div class="ingredients item-wrapper">
+          <div class="ingredient item">
+            <h2>Flour</h2>
+            <p>{{dough.flour() - dough.prefermentFlour() }}g</p>
+          </div>
+          <div class="ingredient item">
+            <h2>Water</h2>
+            <p>{{dough.water() - dough.prefermentWater()}}g</p>
+          </div>
+          <div class="ingredient item">
+            <h2>Salt</h2>
+            <p>{{dough.salt()}}g</p>
+          </div>
+          <div class="ingredient item">
+            <h2>Yeast</h2>
+            <p>{{dough.yeast() - dough.prefermentYeast()}}g</p>
+          </div>
         </div>
-        <div class="ingredient item">
-          <h2>Starter water</h2>
-          <p>{{dough.prefermentWater()}}g</p>
+        <div v-if="dough.prefermentPrc > 0" class="ingredients item-wrapper">
+          <div class="ingredient item">
+            <h2>Starter flour</h2>
+            <p>{{dough.prefermentFlour()}}g</p>
+          </div>
+          <div class="ingredient item">
+            <h2>Starter water</h2>
+            <p>{{dough.prefermentWater()}}g</p>
+          </div>
+          <div class="ingredient item">
+            <h2>Starter yeast</h2>
+            <p>{{dough.prefermentYeast()}}g</p>
+          </div>
         </div>
-        <div class="ingredient item">
-          <h2>Starter yeast</h2>
-          <p>{{dough.prefermentYeast()}}g</p>
-        </div>
+      <div class="instructions" v-if="dough.steps">
+        <h2>Instructions</h2>
+        <p>{{dough.steps}}</p>
       </div>
-    <div class="instructions" v-if="dough.steps">
-      <h2>Instructions</h2>
-      <p>{{dough.steps}}</p>
+      <button v-on:click="openEditor">Edit</button>
+      <button v-on:click="deleteDough">Delete</button>
+      <button v-on:click="close">Close</button>
     </div>
-    <button v-on:click="edit">Edit</button>
-    <button v-on:click="deleteDough">Delete</button>
-    <button v-on:click="close">Close</button>
+    <dough-editor v-show="editing" v-bind:dough="draftDough" @close="closeEditor" @save="saveDough"></dough-editor>
   </div>
 </template>
 
 <script>
 import firebase from 'firebase'
 import Dough from './dough'
+import DoughEditor from './DoughEditor'
 
 export default {
   name: 'recipe-page',
 
+  components: {
+    DoughEditor
+  },
+
   data () {
     return {
-      dough: new Dough()
+      dough: new Dough(),
+      draftDough: new Dough(),
+      editing: false
     }
   },
 
@@ -73,10 +83,17 @@ export default {
     close: function () {
       this.$router.replace('/')
     },
-    edit: function () {
-      let uid = this.$route.params.userId
-      let did = this.$route.params.doughId
-      this.$router.push({ path: `/${uid}/doughs/${did}/edit` })
+    openEditor: function () {
+      this.draftDough.copy(this.dough)
+      this.editing = true
+    },
+    closeEditor: function () {
+      this.editing = false
+    },
+    saveDough: function () {
+      this.dough.copy(this.draftDough)
+      this.getDoughRef().set(this.dough)
+      this.editing = false
     },
     deleteDough: function () {
       this.$dialog.confirm('Are you sure you want to delete this dough?')
@@ -90,13 +107,13 @@ export default {
         })
     },
     getDough: function () {
-      this.getDoughRef().once('value').then(function (snapshot) {
+      this.getDoughRef().once('value').then((snapshot) => {
         if (snapshot.val()) {
           this.dough.copy(snapshot.val())
         } else {
           console.log('Error retrieving dough')
         }
-      }.bind(this))
+      })
     },
     getDoughRef: function () {
       let uid = this.$route.params.userId
