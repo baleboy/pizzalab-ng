@@ -18,13 +18,20 @@ export default {
 
   data () {
     return {
-      draftDough: new Dough(),
+      draftDough: new Dough()
     }
   },
 
   methods: {
     closePage: function () {
-      this.$router.replace('/')
+      let defaultDough = new Dough()
+      if (this.draftDough.isEqual(defaultDough)) {
+        this.$router.replace('/')
+      } else {
+        this.$dialog.confirm('Discard edits?').then(() => {
+          this.$router.replace('/')
+        })
+      }
     },
     saveDough: function () {
       let ts = Date.now()
@@ -32,8 +39,8 @@ export default {
       let newDoughRef = doughListRef.push()
       this.draftDough.timeCreated = ts
       newDoughRef.set(this.draftDough)
-      this.closePage()
-    },
+      this.$router.replace('/')
+    }
   },
 
   props: [ 'userId' ]
