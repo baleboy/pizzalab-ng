@@ -79,8 +79,15 @@ export default {
       this.$router.push({ path: `/${uid}/doughs/${did}/edit` })
     },
     deleteDough: function () {
-      this.getDoughRef().remove()
-      this.close()
+      this.$dialog.confirm('Are you sure you want to delete this dough?')
+        .then(() => {
+          console.log('Clicked on proceed')
+          this.getDoughRef().remove()
+          this.close()
+        })
+        .catch(() => {
+          console.log('Clicked on cancel')
+        })
     },
     getDough: function () {
       this.getDoughRef().once('value').then(function (snapshot) {

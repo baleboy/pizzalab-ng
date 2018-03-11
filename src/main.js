@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VuejsDialog from 'vuejs-dialog'
 import firebase from 'firebase'
 
 import App from './App'
@@ -10,6 +11,10 @@ import LoginPage from './components/LoginPage'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
+Vue.use(VuejsDialog, {
+  okText: 'Confirm',
+  cancelText: 'Cancel'
+})
 
 /* eslint-disable no-new */
 const routes = [
