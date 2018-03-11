@@ -5,7 +5,7 @@
           <dough-card v-bind:dough="item.dough"></dough-card>
         </div>
       </div>
-      <button v-on:click="addDough">Add Dough</button>
+      <button v-on:click="addDough">New Dough</button>
     </div>
 </template>
 
