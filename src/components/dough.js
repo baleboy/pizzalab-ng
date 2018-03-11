@@ -27,6 +27,17 @@ export default class Dough {
     this.timeCreated = obj.timeCreated
   }
 
+  isEqual (obj) {
+    let same = true
+    for (var data in obj) {
+      if (this[data] !== obj[data]) {
+        same = false
+        break
+      }
+    }
+    return same
+  }
+
   flour () {
     return Math.round(this.pizzas * this.weightPerPizza / (1 + (this.hydration + this.saltPrc + this.yeastPrc) / 100))
   }
