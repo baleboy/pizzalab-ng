@@ -13,7 +13,7 @@ export default class Dough {
     this.timeCreated = 0
   }
 
-  fromJSON (obj) {
+  copy (obj) {
     this.doughName = obj.doughName
     this.pizzas = obj.pizzas
     this.hydration = obj.hydration

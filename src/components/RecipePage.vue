@@ -92,7 +92,7 @@ export default {
     getDough: function () {
       this.getDoughRef().once('value').then(function (snapshot) {
         if (snapshot.val()) {
-          this.dough.fromJSON(snapshot.val())
+          this.dough.copy(snapshot.val())
         } else {
           console.log('Error retrieving dough')
         }

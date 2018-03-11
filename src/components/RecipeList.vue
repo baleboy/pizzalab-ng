@@ -48,7 +48,7 @@ export default {
       let doughsRef = firebase.database().ref('users/' + this.userId + '/doughs')
       doughsRef.on('child_added', function (data) {
         let dough = new Dough()
-        dough.fromJSON(data.val())
+        dough.copy(data.val())
         let doughItem = { key: data.key, dough: dough }
         this.doughList.push(doughItem)
         this.doughList.sort(function (d1, d2) {
