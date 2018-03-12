@@ -21,7 +21,7 @@
       <p>Water: {{dough.water()}}</p>
       <p>Salt: {{dough.salt()}}</p>
       <p>Yeast: {{dough.yeast()}}</p>
-    </div>  
+    </div>
   </div>
 </template>
 

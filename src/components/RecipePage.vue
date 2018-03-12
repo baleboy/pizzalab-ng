@@ -120,12 +120,12 @@ export default {
     copyDough: function () {
       let dup = new Dough()
       dup.copy(this.dough)
-      dup.doughName = "Copy of " + dup.doughName
+      dup.doughName = 'Copy of ' + dup.doughName
       dup.timeCreated = Date.now()
       let doughListRef = firebase.database().ref('users/' + this.userId + '/doughs')
       let newDoughRef = doughListRef.push()
       newDoughRef.set(dup)
-      this.$router.push('/' + this.userId + '/doughs/' + newDoughRef.key) 
+      this.$router.push('/' + this.userId + '/doughs/' + newDoughRef.key)
     },
     getDough: function () {
       this.getDoughRef().once('value').then((snapshot) => {

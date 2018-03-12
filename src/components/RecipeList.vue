@@ -1,10 +1,13 @@
 <template>
   <div>
-    <div class="toolbar">
-      <button class="toolbutton" v-on:click="addDough">New Dough</button>
-    </div>
     <div class="content">
       <div class="item-wrapper">
+        <div class="item" v-on:click="addDough">
+          <card>
+            <p class="huge">+</p>
+            <p>Add new dough</p>
+          </card>
+        </div>
         <div class="item" v-for="item in doughList" v-on:click="openRecipe(item)">
           <dough-card v-bind:dough="item.dough"></dough-card>
         </div>
@@ -14,6 +17,7 @@
 </template>
 
 <script>
+import Card from './Card'
 import DoughCard from './DoughCard'
 import Dough from './dough.js'
 import firebase from 'firebase'
@@ -21,6 +25,7 @@ import firebase from 'firebase'
 export default {
   name: 'recipe-list',
   components: {
+    Card,
     DoughCard
   },
   data: function () {
@@ -82,5 +87,8 @@ export default {
 
 .item {
   margin: 1em; }
+
+.huge {
+  font-size: 3em; }
 
 </style>
