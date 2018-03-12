@@ -3,6 +3,7 @@
     <div v-show="!editing">
       <div class="toolbar">
         <button class="toolbutton" v-on:click="openEditor">Edit</button>
+        <button class="toolbutton" v-on:click="copyDough">Copy</button>
         <button class="toolbutton" v-on:click="deleteDough">Delete</button>
         <button class="closebutton" v-on:click="close">Close</button>
       </div>
@@ -115,6 +116,16 @@ export default {
         .catch(() => {
           console.log('Clicked on cancel')
         })
+    },
+    copyDough: function () {
+      let dup = new Dough()
+      dup.copy(this.dough)
+      dup.doughName = "Copy of " + dup.doughName
+      dup.timeCreated = Date.now()
+      let doughListRef = firebase.database().ref('users/' + this.userId + '/doughs')
+      let newDoughRef = doughListRef.push()
+      newDoughRef.set(dup)
+      this.$router.push('/' + this.userId + '/doughs/' + newDoughRef.key) 
     },
     getDough: function () {
       this.getDoughRef().once('value').then((snapshot) => {
