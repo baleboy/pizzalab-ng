@@ -7,20 +7,35 @@
     <div class="content">
       <p>Name: <input type="text" v-model="dough.doughName"></p>
       <p>Pizzas: <input type="number" v-model.number="dough.pizzas"></p>
-      <p>Hydration: <input type="number" v-model.number="dough.hydration">%</p>
-      <p>Yeast: <input type="number" step="0.1" v-model.number="dough.yeastPrc">%</p>
-      <p>Salt:  <input type="number" step="0.1" v-model.number="dough.saltPrc">%</p>
+      <p>Weight per pizza: 
+        <input type="number" v-model.number="dough.weightPerPizza">%
+        <span class="note">(Total dough {{dough.pizzas * dough.weightPerPizza}}g)</span>
+      </p>
+      <p>Hydration:
+        <input type="number" v-model.number="dough.hydration">%
+        <span class="note">(Flour {{dough.flour()}}g, water {{dough.water()}}g)</span>
+      </p>
+      <p>Yeast: 
+        <input type="number" step="0.1" v-model.number="dough.yeastPrc">%
+        <span class="note">({{dough.yeast()}}g)</span>
+      </p>
+      <p>Salt:
+        <input type="number" step="0.1" v-model.number="dough.saltPrc">%
+        <span class="note">({{dough.salt()}}g)</span>
+      </p>
       <p>Starter: <input type="number" step="any" v-model.number="dough.prefermentPrc">%</p>
       <div v-if="dough.prefermentPrc > 0">
-        <p>Starter hydration: <input type="number" step="any" v-model.number.lazy="dough.prefermentHydration">%</p>
-        <p>Starter yeast: <input type="number" step="any" v-model.number.lazy="dough.prefermentYeastPrc">%</p>
+        <p>Starter hydration: 
+          <input type="number" step="any" v-model.number.lazy="dough.prefermentHydration">%
+          <span class="note">(Flour {{dough.prefermentFlour()}}g, water {{dough.prefermentWater()}}g)</span>
+        </p>
+        <p>Starter yeast:
+          <input type="number" step="any" v-model.number.lazy="dough.prefermentYeastPrc">%
+          <span class="note">({{dough.prefermentYeast()}}g)</span>
+        </p>
       </div>
       <h2>Instructions:</h2>
       <textarea v-model="dough.steps" placeholder="Enter steps here"></textarea>
-      <p>Flour: {{dough.flour()}}</p>
-      <p>Water: {{dough.water()}}</p>
-      <p>Salt: {{dough.salt()}}</p>
-      <p>Yeast: {{dough.yeast()}}</p>
     </div>
   </div>
 </template>
@@ -84,6 +99,12 @@ textarea {
   font-size: 1em;
   width: 450px;
   height: 300px;
+  border: none;
+  background-color: #fafafa
+}
+
+.note {
+  color: #888888;
 }
 
 @media (max-width: 660px) {
