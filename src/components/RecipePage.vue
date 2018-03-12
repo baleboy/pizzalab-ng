@@ -88,7 +88,13 @@ export default {
       this.editing = true
     },
     closeEditor: function () {
-      this.editing = false
+      if (this.draftDough.isEqual(this.dough)) {
+        this.editing = false
+      } else {
+        this.$dialog.confirm('Discard edits?').then(() => {
+          this.editing = false
+        })
+      }
     },
     saveDough: function () {
       this.dough.copy(this.draftDough)
