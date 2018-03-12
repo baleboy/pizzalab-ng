@@ -121,9 +121,8 @@ button:active:enabled {
 .toolbar {
   width: 100%;
   background-color: #0066ee;
-  padding-left: 2em;
-  padding-right: 2em;
-  overflow: auto;}
+  overflow: auto;
+  padding-right: 3px;}
 
 .toolbutton {
   float: left;
