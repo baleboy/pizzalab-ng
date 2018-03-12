@@ -119,12 +119,17 @@ button:active:enabled {
   width: 100%; 
   background-color: #0066ee;
   padding-left: 2em;
+  padding-right: 2em;
   padding-top: 3px;
   padding-bottom: 3px;
   overflow: auto;}
 
 .toolbutton {
   float: left;
+}
+
+.closebutton {
+  float: right;
 }
 
 </style>

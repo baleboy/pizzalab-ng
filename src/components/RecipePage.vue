@@ -4,7 +4,7 @@
       <div class="toolbar">
         <button class="toolbutton" v-on:click="openEditor">Edit</button>
         <button class="toolbutton" v-on:click="deleteDough">Delete</button>
-        <button class="toolbutton" v-on:click="close">Close</button>
+        <button class="closebutton" v-on:click="close">Close</button>
       </div>
       <div class="content">
         <h1>{{dough.doughName}}</h1>

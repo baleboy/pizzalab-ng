@@ -2,7 +2,7 @@
   <div>
     <div class="toolbar">
       <button class="toolbutton" v-on:click="save">Save</button>
-      <button class="toolbutton" v-on:click="close">Close</button>
+      <button class="closebutton" v-on:click="close">Close</button>
     </div>
     <div class="content">
       <p>Name: <input type="text" v-model="dough.doughName"></p>
