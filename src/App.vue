@@ -10,7 +10,7 @@
         <login-panel class="align-right"></login-panel>
       </div>
     </div>
-    <div class="content">
+    <div>
       <router-view></router-view>
     </div>
   </div>
@@ -114,4 +114,17 @@ button:active:enabled {
 .content {
   margin-top: 2em;
 }
+
+.toolbar {
+  width: 100%; 
+  background-color: #0066ee;
+  padding-left: 2em;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  overflow: auto;}
+
+.toolbutton {
+  float: left;
+}
+
 </style>

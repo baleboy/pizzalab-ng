@@ -1,52 +1,56 @@
 <template>
   <div>
     <div v-show="!editing">
-      <h1>{{dough.doughName}}</h1>
-      <p>{{dough.hydration}}% hydration</p>
-      <div class="pizzas">
-        <h2>Pizzas</h2>
-        <input type="number" v-model.number="dough.pizzas">
+      <div class="toolbar">
+        <button class="toolbutton" v-on:click="openEditor">Edit</button>
+        <button class="toolbutton" v-on:click="deleteDough">Delete</button>
+        <button class="toolbutton" v-on:click="close">Close</button>
       </div>
-      <h2>Ingredients</h2>
-        <div class="ingredients item-wrapper">
-          <div class="ingredient item">
-            <h2>Flour</h2>
-            <p>{{dough.flour() - dough.prefermentFlour() }}g</p>
-          </div>
-          <div class="ingredient item">
-            <h2>Water</h2>
-            <p>{{dough.water() - dough.prefermentWater()}}g</p>
-          </div>
-          <div class="ingredient item">
-            <h2>Salt</h2>
-            <p>{{dough.salt()}}g</p>
-          </div>
-          <div class="ingredient item">
-            <h2>Yeast</h2>
-            <p>{{dough.yeast() - dough.prefermentYeast()}}g</p>
-          </div>
+      <div class="content">
+        <h1>{{dough.doughName}}</h1>
+        <p>{{dough.hydration}}% hydration</p>
+        <div class="pizzas">
+          <h2>Pizzas</h2>
+          <input type="number" v-model.number="dough.pizzas">
         </div>
-        <div v-if="dough.prefermentPrc > 0" class="ingredients item-wrapper">
-          <div class="ingredient item">
-            <h2>Starter flour</h2>
-            <p>{{dough.prefermentFlour()}}g</p>
+        <h2>Ingredients</h2>
+          <div class="ingredients item-wrapper">
+            <div class="ingredient item">
+              <h2>Flour</h2>
+              <p>{{dough.flour() - dough.prefermentFlour() }}g</p>
+            </div>
+            <div class="ingredient item">
+              <h2>Water</h2>
+              <p>{{dough.water() - dough.prefermentWater()}}g</p>
+            </div>
+            <div class="ingredient item">
+              <h2>Salt</h2>
+              <p>{{dough.salt()}}g</p>
+            </div>
+            <div class="ingredient item">
+              <h2>Yeast</h2>
+              <p>{{dough.yeast() - dough.prefermentYeast()}}g</p>
+            </div>
           </div>
-          <div class="ingredient item">
-            <h2>Starter water</h2>
-            <p>{{dough.prefermentWater()}}g</p>
+          <div v-if="dough.prefermentPrc > 0" class="ingredients item-wrapper">
+            <div class="ingredient item">
+              <h2>Starter flour</h2>
+              <p>{{dough.prefermentFlour()}}g</p>
+            </div>
+            <div class="ingredient item">
+              <h2>Starter water</h2>
+              <p>{{dough.prefermentWater()}}g</p>
+            </div>
+            <div class="ingredient item">
+              <h2>Starter yeast</h2>
+              <p>{{dough.prefermentYeast()}}g</p>
+            </div>
           </div>
-          <div class="ingredient item">
-            <h2>Starter yeast</h2>
-            <p>{{dough.prefermentYeast()}}g</p>
-          </div>
+        <div class="instructions" v-if="dough.steps">
+          <h2>Instructions</h2>
+          <p>{{dough.steps}}</p>
         </div>
-      <div class="instructions" v-if="dough.steps">
-        <h2>Instructions</h2>
-        <p>{{dough.steps}}</p>
       </div>
-      <button v-on:click="openEditor">Edit</button>
-      <button v-on:click="deleteDough">Delete</button>
-      <button v-on:click="close">Close</button>
     </div>
     <dough-editor v-show="editing" v-bind:dough="draftDough" @close="closeEditor" @save="saveDough"></dough-editor>
   </div>

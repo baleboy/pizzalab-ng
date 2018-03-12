@@ -1,12 +1,16 @@
 <template>
   <div>
+    <div class="toolbar">
+      <button class="toolbutton" v-on:click="addDough">New Dough</button>
+    </div>
+    <div class="content">
       <div class="item-wrapper">
         <div class="item" v-for="item in doughList" v-on:click="openRecipe(item)">
           <dough-card v-bind:dough="item.dough"></dough-card>
         </div>
       </div>
-      <button v-on:click="addDough">New Dough</button>
     </div>
+  </div>
 </template>
 
 <script>

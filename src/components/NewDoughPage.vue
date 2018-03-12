@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <dough-editor v-bind:dough="draftDough" @close="closePage" @save="saveDough"></dough-editor>
-  </div>
+  <dough-editor v-bind:dough="draftDough" @close="closePage" @save="saveDough"></dough-editor>
 </template>
 
 <script>

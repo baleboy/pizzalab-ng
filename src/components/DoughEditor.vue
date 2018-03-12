@@ -1,23 +1,27 @@
 <template>
   <div>
-    <p>Name: <input type="text" v-model="dough.doughName"></p>
-    <p>Pizzas: <input type="number" v-model.number="dough.pizzas"></p>
-    <p>Hydration: <input type="number" v-model.number="dough.hydration">%</p>
-    <p>Yeast: <input type="number" step="0.1" v-model.number="dough.yeastPrc">%</p>
-    <p>Salt:  <input type="number" step="0.1" v-model.number="dough.saltPrc">%</p>
-    <p>Starter: <input type="number" step="any" v-model.number="dough.prefermentPrc">%</p>
-    <div v-if="dough.prefermentPrc > 0">
-      <p>Starter hydration: <input type="number" step="any" v-model.number.lazy="dough.prefermentHydration">%</p>
-      <p>Starter yeast: <input type="number" step="any" v-model.number.lazy="dough.prefermentYeastPrc">%</p>
+    <div class="toolbar">
+      <button class="toolbutton" v-on:click="save">Save</button>
+      <button class="toolbutton" v-on:click="close">Close</button>
     </div>
-    <h2>Instructions:</h2>
-    <textarea v-model="dough.steps" placeholder="Enter steps here"></textarea>
-    <p>Flour: {{dough.flour()}}</p>
-    <p>Water: {{dough.water()}}</p>
-    <p>Salt: {{dough.salt()}}</p>
-    <p>Yeast: {{dough.yeast()}}</p>
-    <button v-on:click="save">Save</button>
-    <button v-on:click="close">Close</button>
+    <div class="content">
+      <p>Name: <input type="text" v-model="dough.doughName"></p>
+      <p>Pizzas: <input type="number" v-model.number="dough.pizzas"></p>
+      <p>Hydration: <input type="number" v-model.number="dough.hydration">%</p>
+      <p>Yeast: <input type="number" step="0.1" v-model.number="dough.yeastPrc">%</p>
+      <p>Salt:  <input type="number" step="0.1" v-model.number="dough.saltPrc">%</p>
+      <p>Starter: <input type="number" step="any" v-model.number="dough.prefermentPrc">%</p>
+      <div v-if="dough.prefermentPrc > 0">
+        <p>Starter hydration: <input type="number" step="any" v-model.number.lazy="dough.prefermentHydration">%</p>
+        <p>Starter yeast: <input type="number" step="any" v-model.number.lazy="dough.prefermentYeastPrc">%</p>
+      </div>
+      <h2>Instructions:</h2>
+      <textarea v-model="dough.steps" placeholder="Enter steps here"></textarea>
+      <p>Flour: {{dough.flour()}}</p>
+      <p>Water: {{dough.water()}}</p>
+      <p>Salt: {{dough.salt()}}</p>
+      <p>Yeast: {{dough.yeast()}}</p>
+    </div>  
   </div>
 </template>
 
