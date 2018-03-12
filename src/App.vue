@@ -13,6 +13,9 @@
     <div>
       <router-view></router-view>
     </div>
+    <div class="footer">
+      <p>Copyright (C) 2018 Francesco Balestrieri</p>
+    </div>
   </div>
 </template>
 
@@ -132,4 +135,10 @@ button:active:enabled {
   float: right;
 }
 
+.footer {
+  text-align: center;
+  margin-top: 2em;
+  padding-top: 1em;
+  padding-bottom: 2em;
+  font-size: 0.9em; }
 </style>
