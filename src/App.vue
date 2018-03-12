@@ -127,12 +127,12 @@ button:active:enabled {
 
 .toolbutton {
   float: left;
-  margin: 2px;
+  margin: 3px 0px 3px 3px;
 }
 
 .closebutton {
   float: right;
-  margin: 2px;
+  margin: 3px 0px 3px 3px;
 }
 
 .footer {
