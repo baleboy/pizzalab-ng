@@ -122,7 +122,8 @@ button:active:enabled {
   width: 100%;
   background-color: #0066ee;
   overflow: auto;
-  padding-right: 3px;}
+  padding-left: 3px;
+  padding-right: 6px;}
 
 .toolbutton {
   float: left;
