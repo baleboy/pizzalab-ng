@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="content">
-      <div class="item-wrapper">
+      <div v-if="!loading" class="item-wrapper">
         <div class="item" v-on:click="addDough">
           <card>
             <p class="huge">+</p>
@@ -12,6 +12,9 @@
           <dough-card v-bind:dough="item.dough"></dough-card>
         </div>
       </div>
+    </div>
+    <div v-if="loading">
+      <p class="loading-indicator">Loading...</p>
     </div>
   </div>
 </template>
@@ -31,17 +34,18 @@ export default {
   data: function () {
     return {
       doughList: [],
-      userId: null
+      userId: null,
+      loading: true
     }
   },
   mounted: function () {
-    firebase.auth().onAuthStateChanged(function (authData) {
+    firebase.auth().onAuthStateChanged((authData) => {
       if (authData) {
         this.userLogged(authData.uid)
       } else {
         this.removeUser()
       }
-    }.bind(this))
+    })
   },
   methods: {
     addDough: function () {
@@ -55,7 +59,7 @@ export default {
       this.userId = uid
       // retrieve dough list
       let doughsRef = firebase.database().ref('users/' + this.userId + '/doughs')
-      doughsRef.on('child_added', function (data) {
+      doughsRef.on('child_added', (data) => {
         let dough = new Dough()
         dough.copy(data.val())
         let doughItem = { key: data.key, dough: dough }
@@ -63,7 +67,8 @@ export default {
         this.doughList.sort(function (d1, d2) {
           return (d2.dough.timeCreated - d1.dough.timeCreated)
         })
-      }.bind(this))
+        this.loading = false
+      })
     },
     removeUser: function () {
       this.doughList = []
@@ -90,5 +95,10 @@ export default {
 
 .huge {
   font-size: 3em; }
+
+.loading-indicator {
+  font-size: 2em;
+  color: #999999;
+}
 
 </style>
