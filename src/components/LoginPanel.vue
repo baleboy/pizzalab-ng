@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span v-if="isLoggedIn">{{ user.displayName }}</span>
+    <span v-if="isLoggedIn" class="username">{{ user.displayName }}</span>
     <button v-if="isLoggedIn" v-on:click="logout">Logout</button>
   </div>
 </template>
@@ -45,3 +45,11 @@ export default {
   }
 }
 </script>
+
+<style>
+@media (max-width: 450px) {
+  .username {
+    display: none;
+  }
+}
+</style>
