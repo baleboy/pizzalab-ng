@@ -73,7 +73,8 @@ export default {
     return {
       dough: new Dough(),
       draftDough: new Dough(),
-      editing: false
+      editing: false,
+      copying: false
     }
   },
 
@@ -102,8 +103,17 @@ export default {
       }
     },
     saveDough: function () {
-      this.dough.copy(this.draftDough)
-      this.getDoughRef().set(this.dough)
+      if (!this.copying) {
+        this.dough.copy(this.draftDough)
+        this.getDoughRef().set(this.dough)
+      } else {
+        this.draftDough.timeCreated = Date.now()
+        let doughListRef = firebase.database().ref('users/' + this.userId + '/doughs')
+        let newDoughRef = doughListRef.push()
+        newDoughRef.set(this.draftDough)
+        this.copying = false
+        this.$router.push('/' + this.userId + '/doughs/' + newDoughRef.key)
+      }
       this.editing = false
     },
     deleteDough: function () {
@@ -118,14 +128,10 @@ export default {
         })
     },
     copyDough: function () {
-      let dup = new Dough()
-      dup.copy(this.dough)
-      dup.doughName = 'Copy of ' + dup.doughName
-      dup.timeCreated = Date.now()
-      let doughListRef = firebase.database().ref('users/' + this.userId + '/doughs')
-      let newDoughRef = doughListRef.push()
-      newDoughRef.set(dup)
-      this.$router.push('/' + this.userId + '/doughs/' + newDoughRef.key)
+      this.copying = true
+      this.draftDough.copy(this.dough)
+      this.draftDough.doughName = 'Copy of ' + this.dough.doughName
+      this.editing = true
     },
     getDough: function () {
       this.getDoughRef().once('value').then((snapshot) => {
