@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-show="!editing">
+    <div v-if="!editing">
       <div class="toolbar">
         <button class="toolbutton" v-on:click="openEditor">Edit</button>
         <button class="toolbutton" v-on:click="copyDough">Copy</button>
@@ -33,7 +33,7 @@
               <p>{{dough.yeast() - dough.prefermentYeast()}}g</p>
             </div>
           </div>
-          <div v-if="dough.prefermentPrc > 0" class="ingredients item-wrapper">
+          <div v-show="dough.prefermentPrc > 0" class="ingredients item-wrapper">
             <div class="ingredient item">
               <h2>Starter flour</h2>
               <p>{{dough.prefermentFlour()}}g</p>
@@ -53,7 +53,7 @@
         </div>
       </div>
     </div>
-    <dough-editor v-show="editing" v-bind:dough="draftDough" @close="closeEditor" @save="saveDough"></dough-editor>
+    <dough-editor v-if="editing" v-bind:dough="draftDough" @close="closeEditor" @save="saveDough"></dough-editor>
   </div>
 </template>
 
