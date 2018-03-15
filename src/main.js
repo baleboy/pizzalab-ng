@@ -29,6 +29,12 @@ const router = new VueRouter({
   mode: 'history'
 })
 
+// Move to top of page after route change. For some reason scrollBehavior
+// (https://router.vuejs.org/en/advanced/scroll-behavior.html) doesn't work
+router.afterEach((to, from) => {
+  document.getElementById('app').scrollIntoView()
+})
+
 const config = {
   apiKey: 'AIzaSyD739TnqiRTSQcNsMaE4yj5SNeT7V9vLj4',
   authDomain: 'pizzalab2-e80ef.firebaseapp.com',
