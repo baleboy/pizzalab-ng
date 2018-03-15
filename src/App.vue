@@ -101,6 +101,9 @@ button:active:enabled {
   padding-right: 2em;
  }
 
+.button-red {
+  background-color: #FF4444;
+}
 .vertical-centered {
   display: table-cell;
   vertical-align: middle;

@@ -75,7 +75,7 @@ input[type="text"] {
 }
 
 input[type="number"] {
-  width: 30px;
+  width: 2.5em;
 }
 
 h1, h2 {
