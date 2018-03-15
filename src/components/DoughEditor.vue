@@ -7,7 +7,7 @@
     <div class="content">
       <p>Name: <input type="text" v-model="dough.doughName"></p>
       <p>Pizzas: <input type="number" v-model.number="dough.pizzas"></p>
-      <p>Weight per pizza: 
+      <p>Weight per pizza:
         <input type="number" v-model.number="dough.weightPerPizza">%
         <span class="note">(Total dough {{dough.pizzas * dough.weightPerPizza}}g)</span>
       </p>
@@ -15,7 +15,7 @@
         <input type="number" v-model.number="dough.hydration">%
         <span class="note">(Flour {{dough.flour()}}g, water {{dough.water()}}g)</span>
       </p>
-      <p>Yeast: 
+      <p>Yeast:
         <input type="number" step="0.1" v-model.number="dough.yeastPrc">%
         <span class="note">({{dough.yeast()}}g)</span>
       </p>
@@ -25,7 +25,7 @@
       </p>
       <p>Starter: <input type="number" step="any" v-model.number="dough.prefermentPrc">%</p>
       <div v-if="dough.prefermentPrc > 0">
-        <p>Starter hydration: 
+        <p>Starter hydration:
           <input type="number" step="any" v-model.number.lazy="dough.prefermentHydration">%
           <span class="note">(Flour {{dough.prefermentFlour()}}g, water {{dough.prefermentWater()}}g)</span>
         </p>
