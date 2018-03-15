@@ -87,11 +87,10 @@ export default {
       flex-wrap: wrap;
   margin: auto;
   margin-bottom: 2em;
-  margin-left: 4em;
   justify-content: flex-start; }
 
 .item {
-  margin: 1em; }
+  margin: 20px; }
 
 .huge {
   font-size: 3em; }
@@ -100,5 +99,11 @@ export default {
   font-size: 2em;
   color: #999999;
 }
+
+@media screen and (max-width: 499px) { .item-wrapper { width: 250px; } }
+@media screen and (min-width: 500px) and (max-width: 749px) { .item-wrapper { width: 500px; } }
+@media screen and (min-width: 750px) and (max-width: 999px) { .item-wrapper { width:750px;  } }
+@media screen and (min-width: 1000px) and (max-width: 1249px) { .item-wrapper { width: 1000px; } }
+@media screen and (min-width: 1250px) { .item-wrapper { width: 1250px; } }
 
 </style>
