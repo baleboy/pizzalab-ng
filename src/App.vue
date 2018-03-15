@@ -3,7 +3,7 @@
     <div class="header">
       <div class="vertical-centered">
         <div class="title">
-          PizzaLab
+          <a href="/">Pizzalab</a>
         </div>
       </div>
       <div class="vertical-centered">
@@ -113,6 +113,11 @@ button:active:enabled {
   font-size: 3em;
   float: left;
   font-family: 'Lobster', cursive; }
+
+.title a {
+  color: inherit;
+  text-decoration: none;
+}
 
 .align-right {
   float: right; }
