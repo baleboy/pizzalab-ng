@@ -1,5 +1,6 @@
 <template>
   <div>
+    <transition name="fade" mode="out-in">
     <div v-if="!editing">
       <div class="toolbar">
         <button class="toolbutton" v-on:click="openEditor">Edit</button>
@@ -53,7 +54,8 @@
         </div>
       </div>
     </div>
-    <dough-editor v-if="editing" v-bind:dough="draftDough" @close="closeEditor" @save="saveDough"></dough-editor>
+      <dough-editor v-else v-bind:dough="draftDough" @close="closeEditor" @save="saveDough"></dough-editor>
+    </transition>
   </div>
 </template>
 
@@ -223,6 +225,14 @@ a {
 .instructions p {
   white-space: pre-wrap;
   text-align: justify;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.1s ease-out;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 
 @media (max-width: 660px) {
