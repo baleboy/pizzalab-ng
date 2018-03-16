@@ -93,7 +93,9 @@ export default {
   margin: 20px; }
 
 .huge {
-  font-size: 3em; }
+  font-size: 3em;
+  color: #0077ff;
+}
 
 .loading-indicator {
   font-size: 2em;
