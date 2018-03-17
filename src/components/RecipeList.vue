@@ -59,6 +59,12 @@ export default {
       this.userId = uid
       // retrieve dough list
       let doughsRef = firebase.database().ref('users/' + this.userId + '/doughs')
+      doughsRef.once('value', (snapshot) => {
+        if (!snapshot.exists()) {
+          console.log('user has no data')
+          this.loading = false
+        }
+      })
       doughsRef.on('child_added', (data) => {
         let dough = new Dough()
         dough.copy(data.val())
