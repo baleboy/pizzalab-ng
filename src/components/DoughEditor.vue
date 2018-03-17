@@ -8,7 +8,7 @@
       <p>Name: <input type="text" v-model="dough.doughName"></p>
       <p>Pizzas: <input type="number" v-model.number="dough.pizzas"></p>
       <p>Weight per pizza:
-        <input type="number" v-model.number="dough.weightPerPizza">%
+        <input type="number" v-model.number="dough.weightPerPizza">g
         <span class="note">(Total dough {{dough.pizzas * dough.weightPerPizza}}g)</span>
       </p>
       <p>Hydration:
