@@ -8,6 +8,7 @@ import RecipeList from './components/RecipeList'
 import RecipePage from './components/RecipePage'
 import LoginPage from './components/LoginPage'
 import NewDoughPage from './components/NewDoughPage'
+import PrivacyPage from './components/PrivacyPage'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
@@ -21,7 +22,8 @@ const routes = [
   { path: '/', component: RecipeList },
   { path: '/:userId/doughs/:doughId', component: RecipePage, props: true },
   { path: '/:userId/add', component: NewDoughPage, props: true },
-  { path: '/auth', component: LoginPage }
+  { path: '/auth', component: LoginPage },
+  { path: '/privacy', component: PrivacyPage }
 ]
 
 const router = new VueRouter({
@@ -55,7 +57,9 @@ new Vue({
       if (user) {
         this.$router.push('/')
       } else {
-        this.$router.push('/auth')
+        if (!(this.$route.path === '/privacy')) {
+          this.$router.push('/auth')
+        }
       }
     })
   }
