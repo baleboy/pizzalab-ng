@@ -14,7 +14,7 @@
       <router-view></router-view>
     </div>
     <div class="footer">
-      <p>Copyright (C) 2018 Francesco Balestrieri - <a href="/privacy">Privacy policy</a></p>
+      <p>Copyright (c) 2018 Francesco Balestrieri - <a href="/privacy">Privacy policy</a></p>
     </div>
   </div>
 </template>
