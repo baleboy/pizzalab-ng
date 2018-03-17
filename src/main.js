@@ -54,10 +54,10 @@ new Vue({
   created () {
     firebase.initializeApp(config)
     firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.$router.push('/')
-      } else {
-        if (!(this.$route.path === '/privacy')) {
+      if (this.$route.path !== '/privacy') {
+        if (user) {
+          this.$router.push('/')
+        } else {
           this.$router.push('/auth')
         }
       }
