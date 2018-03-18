@@ -55,7 +55,7 @@
         <div class="notes">
           <h2>Notes</h2>
           <div class="notesinput">
-            <input type="text" placeholder="Type note..." v-model="newNote">
+            <input type="text" placeholder="Type note..." v-model="newNote" v-on:keyup.13="saveNote">
             <button @click="saveNote">Add</button>
           </div>
           <ul v-for="item in notesList">
