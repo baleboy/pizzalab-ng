@@ -52,6 +52,19 @@
           <h2>Instructions</h2>
           <p>{{dough.steps}}</p>
         </div>
+        <div class="notes">
+          <h2>Notes</h2>
+          <div class="notesinput">
+            <input type="text" placeholder="Type note..." v-model="newNote">
+            <button @click="saveNote">Add</button>
+          </div>
+          <ul v-for="item in notesList">
+            <li>
+              <p class="timestamp">{{item.formattedTime}}</p>
+              <p>{{item.myText}}</p>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
       <dough-editor v-else v-bind:dough="draftDough" @close="closeEditor" @save="saveDough"></dough-editor>
@@ -76,7 +89,9 @@ export default {
       dough: new Dough(),
       draftDough: new Dough(),
       editing: false,
-      copying: false
+      copying: false,
+      newNote: '',
+      notesList: []
     }
   },
 
@@ -87,6 +102,19 @@ export default {
     '$route': 'getDough'
   },
 
+  mounted: function () {
+    console.log('mounted')
+    let ref = this.getDoughRef().child('notes')
+    ref.on('child_added', (data) => {
+      let newNote = data.val()
+      let d = new Date(newNote.myTime)
+      newNote.formattedTime = d.toLocaleString()
+      this.notesList.push(newNote)
+      this.notesList.sort(function (n1, n2) {
+        return (n2.myTime - n1.myTime)
+      })
+    })
+  },
   methods: {
     close: function () {
       this.$router.replace('/')
@@ -148,6 +176,11 @@ export default {
       let uid = this.$route.params.userId
       let did = this.$route.params.doughId
       return firebase.database().ref('users/' + uid + '/doughs/' + did)
+    },
+    saveNote: function () {
+      let ref = this.getDoughRef().child('notes')
+      ref.push({ myText: this.newNote, myTime: Date.now() })
+      this.newNote = ''
     }
   },
 
@@ -227,6 +260,35 @@ a {
   text-align: justify;
 }
 
+.notes {
+  max-width: 550px;
+  margin: auto;
+}
+
+.notes li {
+  width: 100%;
+  white-space: pre-wrap;
+  text-align: justify;
+  margin-top: 1em;
+}
+
+.notes p {
+  margin: 0;
+  padding: 0;
+  margin-top: -1em;
+}
+
+.notesinput input {
+  width: 400px;
+  margin-right: 20px;
+  font-size: 0.8em;
+}
+
+.timestamp {
+  color: gray;
+  font-size: 0.8em;
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.1s ease-out;
 }
@@ -241,6 +303,12 @@ a {
   }
   .instructions {
     max-width: 300px;
+  }
+  .notes {
+    max-width: 300px;
+  }
+  .notesinput input {
+    max-width: 200px;
   }
 }
 </style>
