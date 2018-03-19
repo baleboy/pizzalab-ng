@@ -61,7 +61,7 @@
           <ul v-for="item in notesList">
             <li>
               <p class="timestamp">{{item.formattedTime}}</p>
-              <p>{{item.myText}}</p>
+              <editable :content="item.myText" @edited="updateNote(item.key, $event)"></editable>
             </li>
           </ul>
         </div>
@@ -76,12 +76,14 @@
 import firebase from 'firebase'
 import Dough from './dough'
 import DoughEditor from './DoughEditor'
+import Editable from './Editable'
 
 export default {
   name: 'recipe-page',
 
   components: {
-    DoughEditor
+    DoughEditor,
+    Editable
   },
 
   data () {
@@ -109,6 +111,7 @@ export default {
       let newNote = data.val()
       let d = new Date(newNote.myTime)
       newNote.formattedTime = d.toLocaleString()
+      newNote.key = data.key
       this.notesList.push(newNote)
       this.notesList.sort(function (n1, n2) {
         return (n2.myTime - n1.myTime)
@@ -181,6 +184,11 @@ export default {
       let ref = this.getDoughRef().child('notes')
       ref.push({ myText: this.newNote, myTime: Date.now() })
       this.newNote = ''
+    },
+    updateNote: function (key, text) {
+      console.log(key + ': update comment: ' + text)
+      let dref = this.getDoughRef().child('notes/' + key + '/myText')
+      dref.set(text)
     }
   },
 
