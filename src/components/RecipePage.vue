@@ -52,19 +52,7 @@
           <h2>Instructions</h2>
           <p>{{dough.steps}}</p>
         </div>
-        <div class="notes">
-          <h2>Notes</h2>
-          <div class="notesinput">
-            <input type="text" placeholder="Type note..." v-model="newNote" v-on:keyup.13="saveNote">
-            <button @click="saveNote">Add</button>
-          </div>
-          <ul v-for="item in notesList">
-            <li>
-              <p class="timestamp">{{item.formattedTime}}</p>
-              <editable :content="item.myText" @edited="updateNote(item.key, $event)"></editable>
-            </li>
-          </ul>
-        </div>
+        <notes-panel></notes-panel>
       </div>
     </div>
       <dough-editor v-else v-bind:dough="draftDough" @close="closeEditor" @save="saveDough"></dough-editor>
@@ -76,14 +64,14 @@
 import firebase from 'firebase'
 import Dough from './dough'
 import DoughEditor from './DoughEditor'
-import Editable from './Editable'
+import NotesPanel from './NotesPanel'
 
 export default {
   name: 'recipe-page',
 
   components: {
     DoughEditor,
-    Editable
+    NotesPanel
   },
 
   data () {
@@ -92,8 +80,6 @@ export default {
       draftDough: new Dough(),
       editing: false,
       copying: false,
-      newNote: '',
-      notesList: []
     }
   },
 
@@ -104,20 +90,6 @@ export default {
     '$route': 'getDough'
   },
 
-  mounted: function () {
-    console.log('mounted')
-    let ref = this.getDoughRef().child('notes')
-    ref.on('child_added', (data) => {
-      let newNote = data.val()
-      let d = new Date(newNote.myTime)
-      newNote.formattedTime = d.toLocaleString()
-      newNote.key = data.key
-      this.notesList.push(newNote)
-      this.notesList.sort(function (n1, n2) {
-        return (n2.myTime - n1.myTime)
-      })
-    })
-  },
   methods: {
     close: function () {
       this.$router.replace('/')
@@ -180,19 +152,7 @@ export default {
       let did = this.$route.params.doughId
       return firebase.database().ref('users/' + uid + '/doughs/' + did)
     },
-    saveNote: function () {
-      let ref = this.getDoughRef().child('notes')
-      ref.push({ myText: this.newNote, myTime: Date.now() })
-      this.newNote = ''
-    },
-    updateNote: function (key, text) {
-      console.log(key + ': update comment: ' + text)
-      let dref = this.getDoughRef().child('notes/' + key + '/myText')
-      dref.set(text)
-    }
   },
-
-  props: [ 'userId', 'doughId' ],
 
   computed: {
     instructions: function () {
@@ -268,35 +228,6 @@ a {
   text-align: justify;
 }
 
-.notes {
-  max-width: 550px;
-  margin: auto;
-}
-
-.notes li {
-  width: 100%;
-  white-space: pre-wrap;
-  text-align: justify;
-  margin-top: 1em;
-}
-
-.notes p {
-  margin: 0;
-  padding: 0;
-  margin-top: -1em;
-}
-
-.notesinput input {
-  width: 400px;
-  margin-right: 20px;
-  font-size: 0.8em;
-}
-
-.timestamp {
-  color: gray;
-  font-size: 0.8em;
-}
-
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.1s ease-out;
 }
@@ -311,12 +242,6 @@ a {
   }
   .instructions {
     max-width: 300px;
-  }
-  .notes {
-    max-width: 300px;
-  }
-  .notesinput input {
-    max-width: 200px;
   }
 }
 </style>
