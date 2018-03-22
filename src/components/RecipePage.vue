@@ -79,7 +79,7 @@ export default {
       dough: new Dough(),
       draftDough: new Dough(),
       editing: false,
-      copying: false,
+      copying: false
     }
   },
 
@@ -151,7 +151,7 @@ export default {
       let uid = this.$route.params.userId
       let did = this.$route.params.doughId
       return firebase.database().ref('users/' + uid + '/doughs/' + did)
-    },
+    }
   },
 
   computed: {

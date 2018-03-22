@@ -9,6 +9,7 @@
       <li>
         <p class="timestamp">{{item.formattedTime}}</p>
         <editable class="body" :content="item.myText" @edited="updateNote(item.key, $event)"></editable>
+        <i class="fas fa-trash-alt inline-button" @click="deleteNote(item.key)"></i>
       </li>
     </ul>
   </div>
@@ -39,12 +40,17 @@ export default {
       let ref = this.getNotesRef().child(key + '/myText')
       ref.set(text)
     },
+    deleteNote: function (key) {
+      console.log('delete note ' + key)
+      let ref = this.getNotesRef().child(key)
+      ref.remove()
+    },
     getNotesRef: function () {
       let uid = this.$route.params.userId
       let did = this.$route.params.doughId
-      return firebase.database().ref('users/' + uid + 
+      return firebase.database().ref('users/' + uid +
         '/doughs/' + did + '/notes')
-    } 
+    }
   },
   mounted: function () {
     let ref = this.getNotesRef()
@@ -57,6 +63,16 @@ export default {
       this.notesList.sort(function (n1, n2) {
         return (n2.myTime - n1.myTime)
       })
+    })
+    ref.on('child_removed', (data) => {
+      console.log('removed note ' + data.key)
+      for (var i = 0; i < this.notesList.length; i++) {
+        if (this.notesList[i].key === data.key) {
+          console.log('remove list element ' + i)
+          this.notesList.splice(i, 1)
+          break
+        }
+      }
     })
   }
 }
@@ -103,6 +119,15 @@ li {
 .timestamp {
   color: gray;
   font-size: 0.8em;
+}
+
+.inline-button {
+  float: right;
+  color: gray;
+}
+
+.inline-button:hover {
+  color: lightGray;
 }
 
 @media (max-width: 660px) {

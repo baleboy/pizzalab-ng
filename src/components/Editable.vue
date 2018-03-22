@@ -1,6 +1,6 @@
 <template>
-  <div contenteditable="true" 
-  @blur="$emit('edited', 
+  <div contenteditable="true"
+  @blur="$emit('edited',
   $event.target.innerText)">
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
   },
   watch: {
     content: function () {
-      this.$el.innerText = this.content;
+      this.$el.innerText = this.content
     }
   }
 }
