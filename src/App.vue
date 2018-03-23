@@ -67,11 +67,6 @@ input {
   background: transparent;
   border-bottom: 1px solid lightGray; }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0; }
-
 button {
   font-size: 0.8em;
   padding: 10px;

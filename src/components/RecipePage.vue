@@ -13,7 +13,7 @@
         <p>{{dough.hydration}}% hydration</p>
         <div class="pizzas">
           <h2>Pizzas</h2>
-          <input type="number" v-model.number="dough.pizzas">
+          <number-input v-model="dough.pizzas"></number-input>
         </div>
         <h2>Ingredients</h2>
           <div class="ingredients item-wrapper">
@@ -65,13 +65,15 @@ import firebase from 'firebase'
 import Dough from './dough'
 import DoughEditor from './DoughEditor'
 import NotesPanel from './NotesPanel'
+import NumberInput from './NumberInput'
 
 export default {
   name: 'recipe-page',
 
   components: {
     DoughEditor,
-    NotesPanel
+    NotesPanel,
+    NumberInput
   },
 
   data () {
