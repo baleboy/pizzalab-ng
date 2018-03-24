@@ -13,8 +13,9 @@
         </div>
       </div>
     </div>
-    <div v-if="loading">
-      <p class="loading-indicator">Loading...</p>
+    <div v-if="loading" class="loading-indicator">
+      <i class="fa fa-spinner fa-spin"></i>
+      <p>Loading...</p>
     </div>
   </div>
 </template>
@@ -106,6 +107,7 @@ export default {
 .loading-indicator {
   font-size: 2em;
   color: #999999;
+  margin-top: 3em;
 }
 
 @media screen and (max-width: 499px) { .item-wrapper { width: 250px; } }
