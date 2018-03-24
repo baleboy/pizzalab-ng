@@ -29,8 +29,9 @@ export default {
       }
     },
     updateValue: function () {
-      console.log(this.$refs.numberInput.value)
-      console.log(parseFloat(this.$refs.numberInput.value))
+      if (this.$refs.numberInput.value < 0) {
+        this.$refs.numberInput.value = 0
+      }
       this.$emit('input', this.$refs.numberInput.value)
     },
     checkForNull: function () {
