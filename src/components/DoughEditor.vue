@@ -16,21 +16,21 @@
         <span class="note">(Flour {{dough.flour()}}g, water {{dough.water()}}g)</span>
       </p>
       <p>Yeast:
-        <input type="number" step="0.1" v-model.number="dough.yeastPrc">%
+        <number-input decimal="true" v-model="dough.yeastPrc"></number-input>%
         <span class="note">({{dough.yeast()}}g)</span>
       </p>
       <p>Salt:
-        <input type="number" step="0.1" v-model.number="dough.saltPrc">%
+        <number-input decimal="true" v-model="dough.saltPrc"></number-input>%
         <span class="note">({{dough.salt()}}g)</span>
       </p>
       <p>Starter: <number-input v-model="dough.prefermentPrc"></number-input>%</p>
       <div v-if="dough.prefermentPrc > 0">
         <p>Starter hydration:
-          <input type="number" step="any" v-model.number.lazy="dough.prefermentHydration">%
+          <number-input v-model="dough.prefermentHydration"></number-input>%
           <span class="note">(Flour {{dough.prefermentFlour()}}g, water {{dough.prefermentWater()}}g)</span>
         </p>
         <p>Starter yeast:
-          <input type="number" step="any" v-model.number.lazy="dough.prefermentYeastPrc">%
+          <number-input decimal="true" v-model="dough.prefermentYeastPrc"></number-input>%
           <span class="note">({{dough.prefermentYeast()}}g)</span>
         </p>
       </div>

@@ -39,7 +39,7 @@ export default class Dough {
   }
 
   flour () {
-    return Math.round(this.pizzas * this.weightPerPizza / (1 + (this.hydration + this.saltPrc + this.yeastPrc) / 100))
+    return Math.round(this.pizzas * this.weightPerPizza / (1 + (this.hydration + parseFloat(this.saltPrc) + parseFloat(this.yeastPrc)) / 100))
   }
 
   water () {
