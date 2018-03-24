@@ -1,23 +1,29 @@
 <template>
-  <input type="number" ref="numberInput" :value="value"
+  <input type="number" ref="numberInput" step="any" :value="value"
   @keydown="validate" @input="updateValue()" @blur="checkForNull">
 </template>
 
 <script>
 
+const intr = new RegExp('^[0-9]+$')
+
 export default {
   name: 'number-input',
   props: {
-    'value': null
+    'value': null,
+    'decimal': true
   },
   methods: {
     validate: function (event) {
       console.log('keyCode: ' + event.keyCode)
       console.log('key: ' + event.key)
-      if (((event.keyCode < 48) || (event.keyCode > 57)) &&
-        !((event.key === 'Enter') || (event.key === 'Backspace') ||
-          (event.key === 'ArrowLeft') || (event.key === 'ArrowRight'))) {
-        event.preventDefault()
+      if ((event.key !== 'Enter') && (event.key !== 'Backspace') &&
+        (event.key != 'ArrowLeft') && (event.key !== 'ArrowRight')) {
+        let newString = this.$refs.numberInput.value + event.key
+        console.log(newString + ' ' + r.test(newString))
+        if (!r.test(newString)) {
+          event.preventDefault()
+        }
       }
     },
     updateValue: function () {
